@@ -1,6 +1,6 @@
 # SER502-clove-Team10
 
-A github repo for the programming language: 'CLOVE'
+A github repository for the programming language: 'CLOVE'
 
 Team #10 Contributors:
 1. Raajveer Khattar - rkhatta1
