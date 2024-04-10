@@ -1,0 +1,28 @@
+﻿Members of Team #10:
+
+Up until Milestone 1:
+
+1. Raajveer Khattar (rkhatta1):
+* Set up the GiHub repository.
+* Implemented the grammar for Ternary operator and the AND/OR/NOT boolean conditions.
+
+
+2. Jill Bharat Hansalia (jhansali):
+* Implemented the Grammar for Loops (While, For, ForEach).
+
+
+3. Akshata Vijay Kulkarni (akulka89):
+* Implemented the grammar for Declarative Statements for data types and the assignment operators.
+
+
+4. Sahil Tarun Parwani (sparwan1):
+* Implemented the grammar for print function, whitespace handling and comments.
+
+
+
+
+For Milestone 2:
+
+
+* The team will collectively work on the runtime environment for the language and exporting an installable package for a package manager (ex. pip, npm).
+* We shall also create a presentation/video for the language and test all the features.

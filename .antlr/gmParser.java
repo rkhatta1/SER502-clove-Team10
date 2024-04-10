@@ -1,4 +1,4 @@
-// Generated from e:/ASU/SER502/Project/SER502-clove-Team10/clove.g4 by ANTLR 4.13.1
+// Generated from e:/ASU/SER502/Project/SER502-clove-Team10/gm.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
-public class cloveParser extends Parser {
+public class gmParser extends Parser {
 	static { RuntimeMetaData.checkVersion("4.13.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -25,15 +25,15 @@ public class cloveParser extends Parser {
 	public static final int
 		RULE_program = 0, RULE_statement = 1, RULE_relational_expr = 2, RULE_condition = 3, 
 		RULE_declarativeStatement = 4, RULE_assignmentStatement = 5, RULE_idAssignmentStatement = 6, 
-		RULE_printStatement = 7, RULE_ifStatements = 8, RULE_elseStatements = 9, 
-		RULE_conditionStatement = 10, RULE_whileStatement = 11, RULE_ternaryOperator = 12, 
-		RULE_forLoop = 13, RULE_forEachLoop = 14, RULE_expr = 15, RULE_bool = 16;
+		RULE_printStatement = 7, RULE_conditionStatement = 8, RULE_whileStatement = 9, 
+		RULE_ternaryOperator = 10, RULE_forLoop = 11, RULE_forEachLoop = 12, RULE_ifStatements = 13, 
+		RULE_elseStatements = 14, RULE_expr = 15, RULE_bool = 16;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"program", "statement", "relational_expr", "condition", "declarativeStatement", 
-			"assignmentStatement", "idAssignmentStatement", "printStatement", "ifStatements", 
-			"elseStatements", "conditionStatement", "whileStatement", "ternaryOperator", 
-			"forLoop", "forEachLoop", "expr", "bool"
+			"assignmentStatement", "idAssignmentStatement", "printStatement", "conditionStatement", 
+			"whileStatement", "ternaryOperator", "forLoop", "forEachLoop", "ifStatements", 
+			"elseStatements", "expr", "bool"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -91,7 +91,7 @@ public class cloveParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "clove.g4"; }
+	public String getGrammarFileName() { return "gm.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -102,7 +102,7 @@ public class cloveParser extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-	public cloveParser(TokenStream input) {
+	public gmParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
@@ -307,26 +307,39 @@ public class cloveParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Relational_exprContext extends ParserRuleContext {
-		public Token relationalOp;
-		public Relational_exprContext relational_expr() {
-			return getRuleContext(Relational_exprContext.class,0);
+		public Relational_exprContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
 		}
+		@Override public int getRuleIndex() { return RULE_relational_expr; }
+	 
+		public Relational_exprContext() { }
+		public void copyFrom(Relational_exprContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class RelationalExpressionContext extends Relational_exprContext {
+		public Token relationalOp;
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
 		}
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public TerminalNode EQUAL() { return getToken(cloveParser.EQUAL, 0); }
-		public TerminalNode NOTEQUAL() { return getToken(cloveParser.NOTEQUAL, 0); }
-		public TerminalNode LESST() { return getToken(cloveParser.LESST, 0); }
-		public TerminalNode GREATERT() { return getToken(cloveParser.GREATERT, 0); }
-		public TerminalNode LESSTEQUAL() { return getToken(cloveParser.LESSTEQUAL, 0); }
-		public TerminalNode GREATERTEQUAL() { return getToken(cloveParser.GREATERTEQUAL, 0); }
-		public Relational_exprContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
+		public TerminalNode EQUAL() { return getToken(gmParser.EQUAL, 0); }
+		public TerminalNode NOTEQUAL() { return getToken(gmParser.NOTEQUAL, 0); }
+		public TerminalNode LESST() { return getToken(gmParser.LESST, 0); }
+		public TerminalNode GREATERT() { return getToken(gmParser.GREATERT, 0); }
+		public TerminalNode LESSTEQUAL() { return getToken(gmParser.LESSTEQUAL, 0); }
+		public TerminalNode GREATERTEQUAL() { return getToken(gmParser.GREATERTEQUAL, 0); }
+		public RelationalExpressionContext(Relational_exprContext ctx) { copyFrom(ctx); }
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class ParenthesisRelationalExpressionContext extends Relational_exprContext {
+		public Relational_exprContext relational_expr() {
+			return getRuleContext(Relational_exprContext.class,0);
 		}
-		@Override public int getRuleIndex() { return RULE_relational_expr; }
+		public ParenthesisRelationalExpressionContext(Relational_exprContext ctx) { copyFrom(ctx); }
 	}
 
 	public final Relational_exprContext relational_expr() throws RecognitionException {
@@ -338,6 +351,7 @@ public class cloveParser extends Parser {
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
 			case 1:
+				_localctx = new ParenthesisRelationalExpressionContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(55);
@@ -349,15 +363,16 @@ public class cloveParser extends Parser {
 				}
 				break;
 			case 2:
+				_localctx = new RelationalExpressionContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(59);
 				expr(0);
 				setState(60);
-				((Relational_exprContext)_localctx).relationalOp = _input.LT(1);
+				((RelationalExpressionContext)_localctx).relationalOp = _input.LT(1);
 				_la = _input.LA(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 264241152L) != 0)) ) {
-					((Relational_exprContext)_localctx).relationalOp = (Token)_errHandler.recoverInline(this);
+					((RelationalExpressionContext)_localctx).relationalOp = (Token)_errHandler.recoverInline(this);
 				}
 				else {
 					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
@@ -383,6 +398,59 @@ public class cloveParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ConditionContext extends ParserRuleContext {
+		public ConditionContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_condition; }
+	 
+		public ConditionContext() { }
+		public void copyFrom(ConditionContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class ConditionParentesisContext extends ConditionContext {
+		public ConditionContext condition() {
+			return getRuleContext(ConditionContext.class,0);
+		}
+		public ConditionParentesisContext(ConditionContext ctx) { copyFrom(ctx); }
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class ConditionNotContext extends ConditionContext {
+		public TerminalNode NOT() { return getToken(gmParser.NOT, 0); }
+		public ConditionContext condition() {
+			return getRuleContext(ConditionContext.class,0);
+		}
+		public ConditionNotContext(ConditionContext ctx) { copyFrom(ctx); }
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class ConditionRelationalExpressionContext extends ConditionContext {
+		public Relational_exprContext relational_expr() {
+			return getRuleContext(Relational_exprContext.class,0);
+		}
+		public ConditionRelationalExpressionContext(ConditionContext ctx) { copyFrom(ctx); }
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class BoolIdOperationContext extends ConditionContext {
+		public Token booleanOp;
+		public List<TerminalNode> ID() { return getTokens(gmParser.ID); }
+		public TerminalNode ID(int i) {
+			return getToken(gmParser.ID, i);
+		}
+		public TerminalNode AND() { return getToken(gmParser.AND, 0); }
+		public TerminalNode OR() { return getToken(gmParser.OR, 0); }
+		public TerminalNode NOT() { return getToken(gmParser.NOT, 0); }
+		public BoolIdOperationContext(ConditionContext ctx) { copyFrom(ctx); }
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class BoolConditionContext extends ConditionContext {
+		public BoolContext bool() {
+			return getRuleContext(BoolContext.class,0);
+		}
+		public BoolConditionContext(ConditionContext ctx) { copyFrom(ctx); }
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class ConditionConnectorContext extends ConditionContext {
 		public Token booleanOp;
 		public List<ConditionContext> condition() {
 			return getRuleContexts(ConditionContext.class);
@@ -390,23 +458,15 @@ public class cloveParser extends Parser {
 		public ConditionContext condition(int i) {
 			return getRuleContext(ConditionContext.class,i);
 		}
-		public TerminalNode NOT() { return getToken(cloveParser.NOT, 0); }
-		public Relational_exprContext relational_expr() {
-			return getRuleContext(Relational_exprContext.class,0);
-		}
-		public List<TerminalNode> ID() { return getTokens(cloveParser.ID); }
-		public TerminalNode ID(int i) {
-			return getToken(cloveParser.ID, i);
-		}
-		public TerminalNode AND() { return getToken(cloveParser.AND, 0); }
-		public TerminalNode OR() { return getToken(cloveParser.OR, 0); }
-		public BoolContext bool() {
-			return getRuleContext(BoolContext.class,0);
-		}
-		public ConditionContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_condition; }
+		public TerminalNode AND() { return getToken(gmParser.AND, 0); }
+		public TerminalNode OR() { return getToken(gmParser.OR, 0); }
+		public ConditionConnectorContext(ConditionContext ctx) { copyFrom(ctx); }
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class BooleanNotIDContext extends ConditionContext {
+		public TerminalNode NOT() { return getToken(gmParser.NOT, 0); }
+		public TerminalNode ID() { return getToken(gmParser.ID, 0); }
+		public BooleanNotIDContext(ConditionContext ctx) { copyFrom(ctx); }
 	}
 
 	public final ConditionContext condition() throws RecognitionException {
@@ -430,6 +490,10 @@ public class cloveParser extends Parser {
 			switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
 			case 1:
 				{
+				_localctx = new ConditionParentesisContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+
 				setState(66);
 				match(T__1);
 				setState(67);
@@ -440,6 +504,9 @@ public class cloveParser extends Parser {
 				break;
 			case 2:
 				{
+				_localctx = new ConditionNotContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
 				setState(70);
 				match(NOT);
 				setState(71);
@@ -448,19 +515,25 @@ public class cloveParser extends Parser {
 				break;
 			case 3:
 				{
+				_localctx = new ConditionRelationalExpressionContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
 				setState(72);
 				relational_expr();
 				}
 				break;
 			case 4:
 				{
+				_localctx = new BoolIdOperationContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
 				setState(73);
 				match(ID);
 				setState(74);
-				((ConditionContext)_localctx).booleanOp = _input.LT(1);
+				((BoolIdOperationContext)_localctx).booleanOp = _input.LT(1);
 				_la = _input.LA(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 60129542144L) != 0)) ) {
-					((ConditionContext)_localctx).booleanOp = (Token)_errHandler.recoverInline(this);
+					((BoolIdOperationContext)_localctx).booleanOp = (Token)_errHandler.recoverInline(this);
 				}
 				else {
 					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
@@ -473,6 +546,9 @@ public class cloveParser extends Parser {
 				break;
 			case 5:
 				{
+				_localctx = new BooleanNotIDContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
 				setState(76);
 				match(NOT);
 				setState(77);
@@ -481,6 +557,9 @@ public class cloveParser extends Parser {
 				break;
 			case 6:
 				{
+				_localctx = new BoolConditionContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
 				setState(78);
 				bool();
 				}
@@ -496,15 +575,15 @@ public class cloveParser extends Parser {
 					_prevctx = _localctx;
 					{
 					{
-					_localctx = new ConditionContext(_parentctx, _parentState);
+					_localctx = new ConditionConnectorContext(new ConditionContext(_parentctx, _parentState));
 					pushNewRecursionContext(_localctx, _startState, RULE_condition);
 					setState(81);
 					if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
 					setState(82);
-					((ConditionContext)_localctx).booleanOp = _input.LT(1);
+					((ConditionConnectorContext)_localctx).booleanOp = _input.LT(1);
 					_la = _input.LA(1);
 					if ( !(_la==AND || _la==OR) ) {
-						((ConditionContext)_localctx).booleanOp = (Token)_errHandler.recoverInline(this);
+						((ConditionConnectorContext)_localctx).booleanOp = (Token)_errHandler.recoverInline(this);
 					}
 					else {
 						if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
@@ -535,17 +614,41 @@ public class cloveParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class DeclarativeStatementContext extends ParserRuleContext {
-		public Token dtype;
-		public TerminalNode ID() { return getToken(cloveParser.ID, 0); }
-		public TerminalNode NUM() { return getToken(cloveParser.NUM, 0); }
-		public TerminalNode Str() { return getToken(cloveParser.Str, 0); }
-		public ConditionContext condition() {
-			return getRuleContext(ConditionContext.class,0);
-		}
 		public DeclarativeStatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_declarativeStatement; }
+	 
+		public DeclarativeStatementContext() { }
+		public void copyFrom(DeclarativeStatementContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class DeclarationStatementContext extends DeclarativeStatementContext {
+		public Token dtype;
+		public TerminalNode ID() { return getToken(gmParser.ID, 0); }
+		public DeclarationStatementContext(DeclarativeStatementContext ctx) { copyFrom(ctx); }
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class BoolInitializationStatementContext extends DeclarativeStatementContext {
+		public TerminalNode ID() { return getToken(gmParser.ID, 0); }
+		public ConditionContext condition() {
+			return getRuleContext(ConditionContext.class,0);
+		}
+		public BoolInitializationStatementContext(DeclarativeStatementContext ctx) { copyFrom(ctx); }
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class IntInitializationStatementContext extends DeclarativeStatementContext {
+		public TerminalNode ID() { return getToken(gmParser.ID, 0); }
+		public TerminalNode NUM() { return getToken(gmParser.NUM, 0); }
+		public IntInitializationStatementContext(DeclarativeStatementContext ctx) { copyFrom(ctx); }
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class StringInitializationStatementContext extends DeclarativeStatementContext {
+		public TerminalNode ID() { return getToken(gmParser.ID, 0); }
+		public TerminalNode Str() { return getToken(gmParser.Str, 0); }
+		public StringInitializationStatementContext(DeclarativeStatementContext ctx) { copyFrom(ctx); }
 	}
 
 	public final DeclarativeStatementContext declarativeStatement() throws RecognitionException {
@@ -557,6 +660,7 @@ public class cloveParser extends Parser {
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
 			case 1:
+				_localctx = new IntInitializationStatementContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(89);
@@ -570,6 +674,7 @@ public class cloveParser extends Parser {
 				}
 				break;
 			case 2:
+				_localctx = new StringInitializationStatementContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(93);
@@ -583,6 +688,7 @@ public class cloveParser extends Parser {
 				}
 				break;
 			case 3:
+				_localctx = new BoolInitializationStatementContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(97);
@@ -596,13 +702,14 @@ public class cloveParser extends Parser {
 				}
 				break;
 			case 4:
+				_localctx = new DeclarationStatementContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(101);
-				((DeclarativeStatementContext)_localctx).dtype = _input.LT(1);
+				((DeclarationStatementContext)_localctx).dtype = _input.LT(1);
 				_la = _input.LA(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 208L) != 0)) ) {
-					((DeclarativeStatementContext)_localctx).dtype = (Token)_errHandler.recoverInline(this);
+					((DeclarationStatementContext)_localctx).dtype = (Token)_errHandler.recoverInline(this);
 				}
 				else {
 					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
@@ -628,25 +735,49 @@ public class cloveParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class AssignmentStatementContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(cloveParser.ID, 0); }
-		public ExprContext expr() {
-			return getRuleContext(ExprContext.class,0);
-		}
-		public List<TerminalNode> ADD() { return getTokens(cloveParser.ADD); }
-		public TerminalNode ADD(int i) {
-			return getToken(cloveParser.ADD, i);
-		}
-		public List<TerminalNode> SUBTRACT() { return getTokens(cloveParser.SUBTRACT); }
-		public TerminalNode SUBTRACT(int i) {
-			return getToken(cloveParser.SUBTRACT, i);
-		}
-		public TernaryOperatorContext ternaryOperator() {
-			return getRuleContext(TernaryOperatorContext.class,0);
-		}
 		public AssignmentStatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_assignmentStatement; }
+	 
+		public AssignmentStatementContext() { }
+		public void copyFrom(AssignmentStatementContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class IncrementOperationContext extends AssignmentStatementContext {
+		public TerminalNode ID() { return getToken(gmParser.ID, 0); }
+		public List<TerminalNode> ADD() { return getTokens(gmParser.ADD); }
+		public TerminalNode ADD(int i) {
+			return getToken(gmParser.ADD, i);
+		}
+		public IncrementOperationContext(AssignmentStatementContext ctx) { copyFrom(ctx); }
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class AssignStatementContext extends AssignmentStatementContext {
+		public TerminalNode ID() { return getToken(gmParser.ID, 0); }
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public AssignStatementContext(AssignmentStatementContext ctx) { copyFrom(ctx); }
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class DecrementOperationContext extends AssignmentStatementContext {
+		public TerminalNode ID() { return getToken(gmParser.ID, 0); }
+		public List<TerminalNode> SUBTRACT() { return getTokens(gmParser.SUBTRACT); }
+		public TerminalNode SUBTRACT(int i) {
+			return getToken(gmParser.SUBTRACT, i);
+		}
+		public DecrementOperationContext(AssignmentStatementContext ctx) { copyFrom(ctx); }
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class TernaryAssignContext extends AssignmentStatementContext {
+		public TerminalNode ID() { return getToken(gmParser.ID, 0); }
+		public TernaryOperatorContext ternaryOperator() {
+			return getRuleContext(TernaryOperatorContext.class,0);
+		}
+		public TernaryAssignContext(AssignmentStatementContext ctx) { copyFrom(ctx); }
 	}
 
 	public final AssignmentStatementContext assignmentStatement() throws RecognitionException {
@@ -657,6 +788,7 @@ public class cloveParser extends Parser {
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 			case 1:
+				_localctx = new AssignStatementContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(105);
@@ -668,6 +800,7 @@ public class cloveParser extends Parser {
 				}
 				break;
 			case 2:
+				_localctx = new IncrementOperationContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(108);
@@ -679,6 +812,7 @@ public class cloveParser extends Parser {
 				}
 				break;
 			case 3:
+				_localctx = new DecrementOperationContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(111);
@@ -690,6 +824,7 @@ public class cloveParser extends Parser {
 				}
 				break;
 			case 4:
+				_localctx = new TernaryAssignContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(114);
@@ -715,14 +850,39 @@ public class cloveParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class IdAssignmentStatementContext extends ParserRuleContext {
-		public List<TerminalNode> ID() { return getTokens(cloveParser.ID); }
-		public TerminalNode ID(int i) {
-			return getToken(cloveParser.ID, i);
-		}
 		public IdAssignmentStatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_idAssignmentStatement; }
+	 
+		public IdAssignmentStatementContext() { }
+		public void copyFrom(IdAssignmentStatementContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class IntIDInitializationContext extends IdAssignmentStatementContext {
+		public List<TerminalNode> ID() { return getTokens(gmParser.ID); }
+		public TerminalNode ID(int i) {
+			return getToken(gmParser.ID, i);
+		}
+		public IntIDInitializationContext(IdAssignmentStatementContext ctx) { copyFrom(ctx); }
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class StringIDInitializationContext extends IdAssignmentStatementContext {
+		public List<TerminalNode> ID() { return getTokens(gmParser.ID); }
+		public TerminalNode ID(int i) {
+			return getToken(gmParser.ID, i);
+		}
+		public StringIDInitializationContext(IdAssignmentStatementContext ctx) { copyFrom(ctx); }
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class BoolIDInitializationContext extends IdAssignmentStatementContext {
+		public List<TerminalNode> ID() { return getTokens(gmParser.ID); }
+		public TerminalNode ID(int i) {
+			return getToken(gmParser.ID, i);
+		}
+		public BoolIDInitializationContext(IdAssignmentStatementContext ctx) { copyFrom(ctx); }
 	}
 
 	public final IdAssignmentStatementContext idAssignmentStatement() throws RecognitionException {
@@ -733,6 +893,7 @@ public class cloveParser extends Parser {
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case T__3:
+				_localctx = new IntIDInitializationContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(119);
@@ -746,6 +907,7 @@ public class cloveParser extends Parser {
 				}
 				break;
 			case T__5:
+				_localctx = new StringIDInitializationContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(123);
@@ -759,6 +921,7 @@ public class cloveParser extends Parser {
 				}
 				break;
 			case T__6:
+				_localctx = new BoolIDInitializationContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(127);
@@ -788,14 +951,27 @@ public class cloveParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class PrintStatementContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(cloveParser.ID, 0); }
-		public ExprContext expr() {
-			return getRuleContext(ExprContext.class,0);
-		}
 		public PrintStatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_printStatement; }
+	 
+		public PrintStatementContext() { }
+		public void copyFrom(PrintStatementContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class PrintIdentifierContext extends PrintStatementContext {
+		public TerminalNode ID() { return getToken(gmParser.ID, 0); }
+		public PrintIdentifierContext(PrintStatementContext ctx) { copyFrom(ctx); }
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class PrintExpressionContext extends PrintStatementContext {
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public PrintExpressionContext(PrintStatementContext ctx) { copyFrom(ctx); }
 	}
 
 	public final PrintStatementContext printStatement() throws RecognitionException {
@@ -806,6 +982,7 @@ public class cloveParser extends Parser {
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,8,_ctx) ) {
 			case 1:
+				_localctx = new PrintIdentifierContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(133);
@@ -819,6 +996,7 @@ public class cloveParser extends Parser {
 				}
 				break;
 			case 2:
+				_localctx = new PrintExpressionContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(137);
@@ -827,6 +1005,431 @@ public class cloveParser extends Parser {
 				expr(0);
 				}
 				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class ConditionStatementContext extends ParserRuleContext {
+		public ConditionStatementContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_conditionStatement; }
+	 
+		public ConditionStatementContext() { }
+		public void copyFrom(ConditionStatementContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class IfconditionContext extends ConditionStatementContext {
+		public ConditionContext condition() {
+			return getRuleContext(ConditionContext.class,0);
+		}
+		public List<IfStatementsContext> ifStatements() {
+			return getRuleContexts(IfStatementsContext.class);
+		}
+		public IfStatementsContext ifStatements(int i) {
+			return getRuleContext(IfStatementsContext.class,i);
+		}
+		public List<ElseStatementsContext> elseStatements() {
+			return getRuleContexts(ElseStatementsContext.class);
+		}
+		public ElseStatementsContext elseStatements(int i) {
+			return getRuleContext(ElseStatementsContext.class,i);
+		}
+		public IfconditionContext(ConditionStatementContext ctx) { copyFrom(ctx); }
+	}
+
+	public final ConditionStatementContext conditionStatement() throws RecognitionException {
+		ConditionStatementContext _localctx = new ConditionStatementContext(_ctx, getState());
+		enterRule(_localctx, 16, RULE_conditionStatement);
+		int _la;
+		try {
+			_localctx = new IfconditionContext(_localctx);
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(141);
+			match(T__8);
+			setState(142);
+			condition(0);
+			setState(143);
+			match(T__9);
+			setState(147); 
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			do {
+				{
+				{
+				setState(144);
+				ifStatements();
+				setState(145);
+				match(T__0);
+				}
+				}
+				setState(149); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 240521389012L) != 0) );
+			setState(151);
+			match(T__10);
+			setState(165);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==T__11) {
+				{
+				{
+				setState(152);
+				match(T__11);
+				setState(153);
+				match(T__9);
+				setState(157); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				do {
+					{
+					{
+					setState(154);
+					elseStatements();
+					setState(155);
+					match(T__0);
+					}
+					}
+					setState(159); 
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 240521389012L) != 0) );
+				setState(161);
+				match(T__10);
+				}
+				}
+				setState(167);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class WhileStatementContext extends ParserRuleContext {
+		public WhileStatementContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_whileStatement; }
+	 
+		public WhileStatementContext() { }
+		public void copyFrom(WhileStatementContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class WhileContext extends WhileStatementContext {
+		public ConditionContext condition() {
+			return getRuleContext(ConditionContext.class,0);
+		}
+		public List<StatementContext> statement() {
+			return getRuleContexts(StatementContext.class);
+		}
+		public StatementContext statement(int i) {
+			return getRuleContext(StatementContext.class,i);
+		}
+		public WhileContext(WhileStatementContext ctx) { copyFrom(ctx); }
+	}
+
+	public final WhileStatementContext whileStatement() throws RecognitionException {
+		WhileStatementContext _localctx = new WhileStatementContext(_ctx, getState());
+		enterRule(_localctx, 18, RULE_whileStatement);
+		int _la;
+		try {
+			_localctx = new WhileContext(_localctx);
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(168);
+			match(T__12);
+			setState(169);
+			condition(0);
+			setState(170);
+			match(T__9);
+			setState(174); 
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			do {
+				{
+				{
+				setState(171);
+				statement();
+				setState(172);
+				match(T__0);
+				}
+				}
+				setState(176); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 240521389012L) != 0) );
+			setState(178);
+			match(T__10);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class TernaryOperatorContext extends ParserRuleContext {
+		public TernaryOperatorContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_ternaryOperator; }
+	 
+		public TernaryOperatorContext() { }
+		public void copyFrom(TernaryOperatorContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class TernaryContext extends TernaryOperatorContext {
+		public ConditionContext condition() {
+			return getRuleContext(ConditionContext.class,0);
+		}
+		public List<StatementContext> statement() {
+			return getRuleContexts(StatementContext.class);
+		}
+		public StatementContext statement(int i) {
+			return getRuleContext(StatementContext.class,i);
+		}
+		public TernaryContext(TernaryOperatorContext ctx) { copyFrom(ctx); }
+	}
+
+	public final TernaryOperatorContext ternaryOperator() throws RecognitionException {
+		TernaryOperatorContext _localctx = new TernaryOperatorContext(_ctx, getState());
+		enterRule(_localctx, 20, RULE_ternaryOperator);
+		try {
+			_localctx = new TernaryContext(_localctx);
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(180);
+			condition(0);
+			setState(181);
+			match(T__13);
+			setState(182);
+			statement();
+			setState(183);
+			match(T__14);
+			setState(184);
+			statement();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class ForLoopContext extends ParserRuleContext {
+		public ForLoopContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_forLoop; }
+	 
+		public ForLoopContext() { }
+		public void copyFrom(ForLoopContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class TraditionalForLoopContext extends ForLoopContext {
+		public Relational_exprContext relational_expr() {
+			return getRuleContext(Relational_exprContext.class,0);
+		}
+		public List<AssignmentStatementContext> assignmentStatement() {
+			return getRuleContexts(AssignmentStatementContext.class);
+		}
+		public AssignmentStatementContext assignmentStatement(int i) {
+			return getRuleContext(AssignmentStatementContext.class,i);
+		}
+		public DeclarativeStatementContext declarativeStatement() {
+			return getRuleContext(DeclarativeStatementContext.class,0);
+		}
+		public List<StatementContext> statement() {
+			return getRuleContexts(StatementContext.class);
+		}
+		public StatementContext statement(int i) {
+			return getRuleContext(StatementContext.class,i);
+		}
+		public TraditionalForLoopContext(ForLoopContext ctx) { copyFrom(ctx); }
+	}
+
+	public final ForLoopContext forLoop() throws RecognitionException {
+		ForLoopContext _localctx = new ForLoopContext(_ctx, getState());
+		enterRule(_localctx, 22, RULE_forLoop);
+		int _la;
+		try {
+			_localctx = new TraditionalForLoopContext(_localctx);
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(186);
+			match(T__15);
+			setState(187);
+			match(T__1);
+			setState(190);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case T__3:
+			case T__5:
+			case T__6:
+				{
+				setState(188);
+				declarativeStatement();
+				}
+				break;
+			case ID:
+				{
+				setState(189);
+				assignmentStatement();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+			setState(192);
+			match(T__0);
+			setState(193);
+			relational_expr();
+			setState(194);
+			match(T__0);
+			setState(195);
+			assignmentStatement();
+			setState(196);
+			match(T__2);
+			setState(197);
+			match(T__9);
+			setState(201); 
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			do {
+				{
+				{
+				setState(198);
+				statement();
+				setState(199);
+				match(T__0);
+				}
+				}
+				setState(203); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 240521389012L) != 0) );
+			setState(205);
+			match(T__10);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class ForEachLoopContext extends ParserRuleContext {
+		public TerminalNode ID() { return getToken(gmParser.ID, 0); }
+		public List<TerminalNode> NUM() { return getTokens(gmParser.NUM); }
+		public TerminalNode NUM(int i) {
+			return getToken(gmParser.NUM, i);
+		}
+		public List<StatementContext> statement() {
+			return getRuleContexts(StatementContext.class);
+		}
+		public StatementContext statement(int i) {
+			return getRuleContext(StatementContext.class,i);
+		}
+		public ForEachLoopContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_forEachLoop; }
+	}
+
+	public final ForEachLoopContext forEachLoop() throws RecognitionException {
+		ForEachLoopContext _localctx = new ForEachLoopContext(_ctx, getState());
+		enterRule(_localctx, 24, RULE_forEachLoop);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(207);
+			match(T__15);
+			setState(208);
+			match(ID);
+			setState(209);
+			match(T__16);
+			setState(210);
+			match(T__17);
+			setState(211);
+			match(T__1);
+			setState(212);
+			match(NUM);
+			setState(213);
+			match(T__18);
+			setState(214);
+			match(NUM);
+			setState(215);
+			match(T__2);
+			setState(216);
+			match(T__9);
+			setState(220); 
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			do {
+				{
+				{
+				setState(217);
+				statement();
+				setState(218);
+				match(T__0);
+				}
+				}
+				setState(222); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 240521389012L) != 0) );
+			setState(224);
+			match(T__10);
 			}
 		}
 		catch (RecognitionException re) {
@@ -853,11 +1456,11 @@ public class cloveParser extends Parser {
 
 	public final IfStatementsContext ifStatements() throws RecognitionException {
 		IfStatementsContext _localctx = new IfStatementsContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_ifStatements);
+		enterRule(_localctx, 26, RULE_ifStatements);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(141);
+			setState(226);
 			statement();
 			}
 		}
@@ -885,397 +1488,12 @@ public class cloveParser extends Parser {
 
 	public final ElseStatementsContext elseStatements() throws RecognitionException {
 		ElseStatementsContext _localctx = new ElseStatementsContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_elseStatements);
+		enterRule(_localctx, 28, RULE_elseStatements);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(143);
-			statement();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class ConditionStatementContext extends ParserRuleContext {
-		public ConditionContext condition() {
-			return getRuleContext(ConditionContext.class,0);
-		}
-		public List<IfStatementsContext> ifStatements() {
-			return getRuleContexts(IfStatementsContext.class);
-		}
-		public IfStatementsContext ifStatements(int i) {
-			return getRuleContext(IfStatementsContext.class,i);
-		}
-		public List<ElseStatementsContext> elseStatements() {
-			return getRuleContexts(ElseStatementsContext.class);
-		}
-		public ElseStatementsContext elseStatements(int i) {
-			return getRuleContext(ElseStatementsContext.class,i);
-		}
-		public ConditionStatementContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_conditionStatement; }
-	}
-
-	public final ConditionStatementContext conditionStatement() throws RecognitionException {
-		ConditionStatementContext _localctx = new ConditionStatementContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_conditionStatement);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(145);
-			match(T__8);
-			setState(146);
-			condition(0);
-			setState(147);
-			match(T__9);
-			setState(151); 
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			do {
-				{
-				{
-				setState(148);
-				ifStatements();
-				setState(149);
-				match(T__0);
-				}
-				}
-				setState(153); 
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 240521389012L) != 0) );
-			setState(155);
-			match(T__10);
-			setState(169);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while (_la==T__11) {
-				{
-				{
-				setState(156);
-				match(T__11);
-				setState(157);
-				match(T__9);
-				setState(161); 
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-				do {
-					{
-					{
-					setState(158);
-					elseStatements();
-					setState(159);
-					match(T__0);
-					}
-					}
-					setState(163); 
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-				} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 240521389012L) != 0) );
-				setState(165);
-				match(T__10);
-				}
-				}
-				setState(171);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class WhileStatementContext extends ParserRuleContext {
-		public ConditionContext condition() {
-			return getRuleContext(ConditionContext.class,0);
-		}
-		public List<StatementContext> statement() {
-			return getRuleContexts(StatementContext.class);
-		}
-		public StatementContext statement(int i) {
-			return getRuleContext(StatementContext.class,i);
-		}
-		public WhileStatementContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_whileStatement; }
-	}
-
-	public final WhileStatementContext whileStatement() throws RecognitionException {
-		WhileStatementContext _localctx = new WhileStatementContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_whileStatement);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(172);
-			match(T__12);
-			setState(173);
-			condition(0);
-			setState(174);
-			match(T__9);
-			setState(178); 
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			do {
-				{
-				{
-				setState(175);
-				statement();
-				setState(176);
-				match(T__0);
-				}
-				}
-				setState(180); 
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 240521389012L) != 0) );
-			setState(182);
-			match(T__10);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class TernaryOperatorContext extends ParserRuleContext {
-		public ConditionContext condition() {
-			return getRuleContext(ConditionContext.class,0);
-		}
-		public List<StatementContext> statement() {
-			return getRuleContexts(StatementContext.class);
-		}
-		public StatementContext statement(int i) {
-			return getRuleContext(StatementContext.class,i);
-		}
-		public TernaryOperatorContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_ternaryOperator; }
-	}
-
-	public final TernaryOperatorContext ternaryOperator() throws RecognitionException {
-		TernaryOperatorContext _localctx = new TernaryOperatorContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_ternaryOperator);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(184);
-			condition(0);
-			setState(185);
-			match(T__13);
-			setState(186);
-			statement();
-			setState(187);
-			match(T__14);
-			setState(188);
-			statement();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class ForLoopContext extends ParserRuleContext {
-		public Relational_exprContext relational_expr() {
-			return getRuleContext(Relational_exprContext.class,0);
-		}
-		public List<AssignmentStatementContext> assignmentStatement() {
-			return getRuleContexts(AssignmentStatementContext.class);
-		}
-		public AssignmentStatementContext assignmentStatement(int i) {
-			return getRuleContext(AssignmentStatementContext.class,i);
-		}
-		public DeclarativeStatementContext declarativeStatement() {
-			return getRuleContext(DeclarativeStatementContext.class,0);
-		}
-		public List<StatementContext> statement() {
-			return getRuleContexts(StatementContext.class);
-		}
-		public StatementContext statement(int i) {
-			return getRuleContext(StatementContext.class,i);
-		}
-		public ForLoopContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_forLoop; }
-	}
-
-	public final ForLoopContext forLoop() throws RecognitionException {
-		ForLoopContext _localctx = new ForLoopContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_forLoop);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(190);
-			match(T__15);
-			setState(191);
-			match(T__1);
-			setState(194);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case T__3:
-			case T__5:
-			case T__6:
-				{
-				setState(192);
-				declarativeStatement();
-				}
-				break;
-			case ID:
-				{
-				setState(193);
-				assignmentStatement();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-			setState(196);
-			match(T__0);
-			setState(197);
-			relational_expr();
-			setState(198);
-			match(T__0);
-			setState(199);
-			assignmentStatement();
-			setState(200);
-			match(T__2);
-			setState(201);
-			match(T__9);
-			setState(205); 
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			do {
-				{
-				{
-				setState(202);
-				statement();
-				setState(203);
-				match(T__0);
-				}
-				}
-				setState(207); 
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 240521389012L) != 0) );
-			setState(209);
-			match(T__10);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class ForEachLoopContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(cloveParser.ID, 0); }
-		public List<TerminalNode> NUM() { return getTokens(cloveParser.NUM); }
-		public TerminalNode NUM(int i) {
-			return getToken(cloveParser.NUM, i);
-		}
-		public List<StatementContext> statement() {
-			return getRuleContexts(StatementContext.class);
-		}
-		public StatementContext statement(int i) {
-			return getRuleContext(StatementContext.class,i);
-		}
-		public ForEachLoopContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_forEachLoop; }
-	}
-
-	public final ForEachLoopContext forEachLoop() throws RecognitionException {
-		ForEachLoopContext _localctx = new ForEachLoopContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_forEachLoop);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(211);
-			match(T__15);
-			setState(212);
-			match(ID);
-			setState(213);
-			match(T__16);
-			setState(214);
-			match(T__17);
-			setState(215);
-			match(T__1);
-			setState(216);
-			match(NUM);
-			setState(217);
-			match(T__18);
-			setState(218);
-			match(NUM);
-			setState(219);
-			match(T__2);
-			setState(220);
-			match(T__9);
-			setState(224); 
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			do {
-				{
-				{
-				setState(221);
-				statement();
-				setState(222);
-				match(T__0);
-				}
-				}
-				setState(226); 
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 240521389012L) != 0) );
 			setState(228);
-			match(T__10);
+			statement();
 			}
 		}
 		catch (RecognitionException re) {
@@ -1291,6 +1509,28 @@ public class cloveParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExprContext extends ParserRuleContext {
+		public ExprContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_expr; }
+	 
+		public ExprContext() { }
+		public void copyFrom(ExprContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class IdExpressionContext extends ExprContext {
+		public TerminalNode ID() { return getToken(gmParser.ID, 0); }
+		public IdExpressionContext(ExprContext ctx) { copyFrom(ctx); }
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class NumExpressionContext extends ExprContext {
+		public TerminalNode NUM() { return getToken(gmParser.NUM, 0); }
+		public NumExpressionContext(ExprContext ctx) { copyFrom(ctx); }
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class ArithmeticExpressionContext extends ExprContext {
 		public Token operation;
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
@@ -1298,17 +1538,19 @@ public class cloveParser extends Parser {
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public TerminalNode NUM() { return getToken(cloveParser.NUM, 0); }
-		public TerminalNode ID() { return getToken(cloveParser.ID, 0); }
-		public TerminalNode DIVIDE() { return getToken(cloveParser.DIVIDE, 0); }
-		public TerminalNode MULTIPLY() { return getToken(cloveParser.MULTIPLY, 0); }
-		public TerminalNode MOD() { return getToken(cloveParser.MOD, 0); }
-		public TerminalNode ADD() { return getToken(cloveParser.ADD, 0); }
-		public TerminalNode SUBTRACT() { return getToken(cloveParser.SUBTRACT, 0); }
-		public ExprContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
+		public TerminalNode DIVIDE() { return getToken(gmParser.DIVIDE, 0); }
+		public TerminalNode MULTIPLY() { return getToken(gmParser.MULTIPLY, 0); }
+		public TerminalNode MOD() { return getToken(gmParser.MOD, 0); }
+		public TerminalNode ADD() { return getToken(gmParser.ADD, 0); }
+		public TerminalNode SUBTRACT() { return getToken(gmParser.SUBTRACT, 0); }
+		public ArithmeticExpressionContext(ExprContext ctx) { copyFrom(ctx); }
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class ParentesisExpressionContext extends ExprContext {
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
 		}
-		@Override public int getRuleIndex() { return RULE_expr; }
+		public ParentesisExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 	}
 
 	public final ExprContext expr() throws RecognitionException {
@@ -1332,6 +1574,10 @@ public class cloveParser extends Parser {
 			switch (_input.LA(1)) {
 			case T__1:
 				{
+				_localctx = new ParentesisExpressionContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+
 				setState(231);
 				match(T__1);
 				setState(232);
@@ -1342,12 +1588,18 @@ public class cloveParser extends Parser {
 				break;
 			case NUM:
 				{
+				_localctx = new NumExpressionContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
 				setState(235);
 				match(NUM);
 				}
 				break;
 			case ID:
 				{
+				_localctx = new IdExpressionContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
 				setState(236);
 				match(ID);
 				}
@@ -1369,15 +1621,15 @@ public class cloveParser extends Parser {
 					switch ( getInterpreter().adaptivePredict(_input,17,_ctx) ) {
 					case 1:
 						{
-						_localctx = new ExprContext(_parentctx, _parentState);
+						_localctx = new ArithmeticExpressionContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
 						setState(239);
 						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
 						setState(240);
-						((ExprContext)_localctx).operation = _input.LT(1);
+						((ArithmeticExpressionContext)_localctx).operation = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 1879048192L) != 0)) ) {
-							((ExprContext)_localctx).operation = (Token)_errHandler.recoverInline(this);
+							((ArithmeticExpressionContext)_localctx).operation = (Token)_errHandler.recoverInline(this);
 						}
 						else {
 							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
@@ -1390,15 +1642,15 @@ public class cloveParser extends Parser {
 						break;
 					case 2:
 						{
-						_localctx = new ExprContext(_parentctx, _parentState);
+						_localctx = new ArithmeticExpressionContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
 						setState(242);
 						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
 						setState(243);
-						((ExprContext)_localctx).operation = _input.LT(1);
+						((ArithmeticExpressionContext)_localctx).operation = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==ADD || _la==SUBTRACT) ) {
-							((ExprContext)_localctx).operation = (Token)_errHandler.recoverInline(this);
+							((ArithmeticExpressionContext)_localctx).operation = (Token)_errHandler.recoverInline(this);
 						}
 						else {
 							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
@@ -1517,71 +1769,71 @@ public class cloveParser extends Parser {
 		"\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001"+
 		"\u0006\u0001\u0006\u0003\u0006\u0084\b\u0006\u0001\u0007\u0001\u0007\u0001"+
 		"\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0003\u0007\u008c\b\u0007\u0001"+
-		"\b\u0001\b\u0001\t\u0001\t\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001"+
-		"\n\u0004\n\u0098\b\n\u000b\n\f\n\u0099\u0001\n\u0001\n\u0001\n\u0001\n"+
-		"\u0001\n\u0001\n\u0004\n\u00a2\b\n\u000b\n\f\n\u00a3\u0001\n\u0001\n\u0005"+
-		"\n\u00a8\b\n\n\n\f\n\u00ab\t\n\u0001\u000b\u0001\u000b\u0001\u000b\u0001"+
-		"\u000b\u0001\u000b\u0001\u000b\u0004\u000b\u00b3\b\u000b\u000b\u000b\f"+
-		"\u000b\u00b4\u0001\u000b\u0001\u000b\u0001\f\u0001\f\u0001\f\u0001\f\u0001"+
-		"\f\u0001\f\u0001\r\u0001\r\u0001\r\u0001\r\u0003\r\u00c3\b\r\u0001\r\u0001"+
-		"\r\u0001\r\u0001\r\u0001\r\u0001\r\u0001\r\u0001\r\u0001\r\u0004\r\u00ce"+
-		"\b\r\u000b\r\f\r\u00cf\u0001\r\u0001\r\u0001\u000e\u0001\u000e\u0001\u000e"+
-		"\u0001\u000e\u0001\u000e\u0001\u000e\u0001\u000e\u0001\u000e\u0001\u000e"+
-		"\u0001\u000e\u0001\u000e\u0001\u000e\u0001\u000e\u0004\u000e\u00e1\b\u000e"+
-		"\u000b\u000e\f\u000e\u00e2\u0001\u000e\u0001\u000e\u0001\u000f\u0001\u000f"+
-		"\u0001\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0003\u000f"+
-		"\u00ee\b\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0001\u000f"+
-		"\u0001\u000f\u0005\u000f\u00f6\b\u000f\n\u000f\f\u000f\u00f9\t\u000f\u0001"+
-		"\u0010\u0001\u0010\u0001\u0010\u0000\u0002\u0006\u001e\u0011\u0000\u0002"+
-		"\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018\u001a\u001c\u001e"+
-		" \u0000\u0007\u0001\u0000\u0016\u001b\u0001\u0000!#\u0001\u0000!\"\u0002"+
-		"\u0000\u0004\u0004\u0006\u0007\u0001\u0000\u001c\u001e\u0001\u0000\u001f"+
-		" \u0001\u0000\u0014\u0015\u0112\u0000%\u0001\u0000\u0000\u0000\u00025"+
-		"\u0001\u0000\u0000\u0000\u0004?\u0001\u0000\u0000\u0000\u0006O\u0001\u0000"+
-		"\u0000\u0000\bg\u0001\u0000\u0000\u0000\nu\u0001\u0000\u0000\u0000\f\u0083"+
-		"\u0001\u0000\u0000\u0000\u000e\u008b\u0001\u0000\u0000\u0000\u0010\u008d"+
-		"\u0001\u0000\u0000\u0000\u0012\u008f\u0001\u0000\u0000\u0000\u0014\u0091"+
-		"\u0001\u0000\u0000\u0000\u0016\u00ac\u0001\u0000\u0000\u0000\u0018\u00b8"+
-		"\u0001\u0000\u0000\u0000\u001a\u00be\u0001\u0000\u0000\u0000\u001c\u00d3"+
-		"\u0001\u0000\u0000\u0000\u001e\u00ed\u0001\u0000\u0000\u0000 \u00fa\u0001"+
-		"\u0000\u0000\u0000\"#\u0003\u0002\u0001\u0000#$\u0005\u0001\u0000\u0000"+
-		"$&\u0001\u0000\u0000\u0000%\"\u0001\u0000\u0000\u0000&\'\u0001\u0000\u0000"+
-		"\u0000\'%\u0001\u0000\u0000\u0000\'(\u0001\u0000\u0000\u0000(\u0001\u0001"+
-		"\u0000\u0000\u0000)6\u0003\u001e\u000f\u0000*6\u0003\u0004\u0002\u0000"+
-		"+6\u0003\u0006\u0003\u0000,6\u0003\b\u0004\u0000-6\u0003\n\u0005\u0000"+
-		".6\u0003\f\u0006\u0000/6\u0003\u000e\u0007\u000006\u0003\u0014\n\u0000"+
-		"16\u0003\u0016\u000b\u000026\u0003\u0018\f\u000036\u0003\u001a\r\u0000"+
-		"46\u0003\u001c\u000e\u00005)\u0001\u0000\u0000\u00005*\u0001\u0000\u0000"+
-		"\u00005+\u0001\u0000\u0000\u00005,\u0001\u0000\u0000\u00005-\u0001\u0000"+
-		"\u0000\u00005.\u0001\u0000\u0000\u00005/\u0001\u0000\u0000\u000050\u0001"+
-		"\u0000\u0000\u000051\u0001\u0000\u0000\u000052\u0001\u0000\u0000\u0000"+
-		"53\u0001\u0000\u0000\u000054\u0001\u0000\u0000\u00006\u0003\u0001\u0000"+
-		"\u0000\u000078\u0005\u0002\u0000\u000089\u0003\u0004\u0002\u00009:\u0005"+
-		"\u0003\u0000\u0000:@\u0001\u0000\u0000\u0000;<\u0003\u001e\u000f\u0000"+
-		"<=\u0007\u0000\u0000\u0000=>\u0003\u001e\u000f\u0000>@\u0001\u0000\u0000"+
-		"\u0000?7\u0001\u0000\u0000\u0000?;\u0001\u0000\u0000\u0000@\u0005\u0001"+
-		"\u0000\u0000\u0000AB\u0006\u0003\uffff\uffff\u0000BC\u0005\u0002\u0000"+
-		"\u0000CD\u0003\u0006\u0003\u0000DE\u0005\u0003\u0000\u0000EP\u0001\u0000"+
-		"\u0000\u0000FG\u0005#\u0000\u0000GP\u0003\u0006\u0003\u0006HP\u0003\u0004"+
-		"\u0002\u0000IJ\u0005$\u0000\u0000JK\u0007\u0001\u0000\u0000KP\u0005$\u0000"+
-		"\u0000LM\u0005#\u0000\u0000MP\u0005$\u0000\u0000NP\u0003 \u0010\u0000"+
-		"OA\u0001\u0000\u0000\u0000OF\u0001\u0000\u0000\u0000OH\u0001\u0000\u0000"+
-		"\u0000OI\u0001\u0000\u0000\u0000OL\u0001\u0000\u0000\u0000ON\u0001\u0000"+
-		"\u0000\u0000PV\u0001\u0000\u0000\u0000QR\n\u0005\u0000\u0000RS\u0007\u0002"+
-		"\u0000\u0000SU\u0003\u0006\u0003\u0006TQ\u0001\u0000\u0000\u0000UX\u0001"+
-		"\u0000\u0000\u0000VT\u0001\u0000\u0000\u0000VW\u0001\u0000\u0000\u0000"+
-		"W\u0007\u0001\u0000\u0000\u0000XV\u0001\u0000\u0000\u0000YZ\u0005\u0004"+
-		"\u0000\u0000Z[\u0005$\u0000\u0000[\\\u0005\u0005\u0000\u0000\\h\u0005"+
-		"%\u0000\u0000]^\u0005\u0006\u0000\u0000^_\u0005$\u0000\u0000_`\u0005\u0005"+
-		"\u0000\u0000`h\u0005&\u0000\u0000ab\u0005\u0007\u0000\u0000bc\u0005$\u0000"+
-		"\u0000cd\u0005\u0005\u0000\u0000dh\u0003\u0006\u0003\u0000ef\u0007\u0003"+
-		"\u0000\u0000fh\u0005$\u0000\u0000gY\u0001\u0000\u0000\u0000g]\u0001\u0000"+
-		"\u0000\u0000ga\u0001\u0000\u0000\u0000ge\u0001\u0000\u0000\u0000h\t\u0001"+
-		"\u0000\u0000\u0000ij\u0005$\u0000\u0000jk\u0005\u0005\u0000\u0000kv\u0003"+
-		"\u001e\u000f\u0000lm\u0005$\u0000\u0000mn\u0005\u001f\u0000\u0000nv\u0005"+
-		"\u001f\u0000\u0000op\u0005$\u0000\u0000pq\u0005 \u0000\u0000qv\u0005 "+
-		"\u0000\u0000rs\u0005$\u0000\u0000st\u0005\u0005\u0000\u0000tv\u0003\u0018"+
-		"\f\u0000ui\u0001\u0000\u0000\u0000ul\u0001\u0000\u0000\u0000uo\u0001\u0000"+
+		"\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0004\b\u0094\b\b\u000b\b\f"+
+		"\b\u0095\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0004\b\u009e"+
+		"\b\b\u000b\b\f\b\u009f\u0001\b\u0001\b\u0005\b\u00a4\b\b\n\b\f\b\u00a7"+
+		"\t\b\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0004\t\u00af\b\t"+
+		"\u000b\t\f\t\u00b0\u0001\t\u0001\t\u0001\n\u0001\n\u0001\n\u0001\n\u0001"+
+		"\n\u0001\n\u0001\u000b\u0001\u000b\u0001\u000b\u0001\u000b\u0003\u000b"+
+		"\u00bf\b\u000b\u0001\u000b\u0001\u000b\u0001\u000b\u0001\u000b\u0001\u000b"+
+		"\u0001\u000b\u0001\u000b\u0001\u000b\u0001\u000b\u0004\u000b\u00ca\b\u000b"+
+		"\u000b\u000b\f\u000b\u00cb\u0001\u000b\u0001\u000b\u0001\f\u0001\f\u0001"+
+		"\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001"+
+		"\f\u0001\f\u0004\f\u00dd\b\f\u000b\f\f\f\u00de\u0001\f\u0001\f\u0001\r"+
+		"\u0001\r\u0001\u000e\u0001\u000e\u0001\u000f\u0001\u000f\u0001\u000f\u0001"+
+		"\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0003\u000f\u00ee\b\u000f\u0001"+
+		"\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0005"+
+		"\u000f\u00f6\b\u000f\n\u000f\f\u000f\u00f9\t\u000f\u0001\u0010\u0001\u0010"+
+		"\u0001\u0010\u0000\u0002\u0006\u001e\u0011\u0000\u0002\u0004\u0006\b\n"+
+		"\f\u000e\u0010\u0012\u0014\u0016\u0018\u001a\u001c\u001e \u0000\u0007"+
+		"\u0001\u0000\u0016\u001b\u0001\u0000!#\u0001\u0000!\"\u0002\u0000\u0004"+
+		"\u0004\u0006\u0007\u0001\u0000\u001c\u001e\u0001\u0000\u001f \u0001\u0000"+
+		"\u0014\u0015\u0112\u0000%\u0001\u0000\u0000\u0000\u00025\u0001\u0000\u0000"+
+		"\u0000\u0004?\u0001\u0000\u0000\u0000\u0006O\u0001\u0000\u0000\u0000\b"+
+		"g\u0001\u0000\u0000\u0000\nu\u0001\u0000\u0000\u0000\f\u0083\u0001\u0000"+
+		"\u0000\u0000\u000e\u008b\u0001\u0000\u0000\u0000\u0010\u008d\u0001\u0000"+
+		"\u0000\u0000\u0012\u00a8\u0001\u0000\u0000\u0000\u0014\u00b4\u0001\u0000"+
+		"\u0000\u0000\u0016\u00ba\u0001\u0000\u0000\u0000\u0018\u00cf\u0001\u0000"+
+		"\u0000\u0000\u001a\u00e2\u0001\u0000\u0000\u0000\u001c\u00e4\u0001\u0000"+
+		"\u0000\u0000\u001e\u00ed\u0001\u0000\u0000\u0000 \u00fa\u0001\u0000\u0000"+
+		"\u0000\"#\u0003\u0002\u0001\u0000#$\u0005\u0001\u0000\u0000$&\u0001\u0000"+
+		"\u0000\u0000%\"\u0001\u0000\u0000\u0000&\'\u0001\u0000\u0000\u0000\'%"+
+		"\u0001\u0000\u0000\u0000\'(\u0001\u0000\u0000\u0000(\u0001\u0001\u0000"+
+		"\u0000\u0000)6\u0003\u001e\u000f\u0000*6\u0003\u0004\u0002\u0000+6\u0003"+
+		"\u0006\u0003\u0000,6\u0003\b\u0004\u0000-6\u0003\n\u0005\u0000.6\u0003"+
+		"\f\u0006\u0000/6\u0003\u000e\u0007\u000006\u0003\u0010\b\u000016\u0003"+
+		"\u0012\t\u000026\u0003\u0014\n\u000036\u0003\u0016\u000b\u000046\u0003"+
+		"\u0018\f\u00005)\u0001\u0000\u0000\u00005*\u0001\u0000\u0000\u00005+\u0001"+
+		"\u0000\u0000\u00005,\u0001\u0000\u0000\u00005-\u0001\u0000\u0000\u0000"+
+		"5.\u0001\u0000\u0000\u00005/\u0001\u0000\u0000\u000050\u0001\u0000\u0000"+
+		"\u000051\u0001\u0000\u0000\u000052\u0001\u0000\u0000\u000053\u0001\u0000"+
+		"\u0000\u000054\u0001\u0000\u0000\u00006\u0003\u0001\u0000\u0000\u0000"+
+		"78\u0005\u0002\u0000\u000089\u0003\u0004\u0002\u00009:\u0005\u0003\u0000"+
+		"\u0000:@\u0001\u0000\u0000\u0000;<\u0003\u001e\u000f\u0000<=\u0007\u0000"+
+		"\u0000\u0000=>\u0003\u001e\u000f\u0000>@\u0001\u0000\u0000\u0000?7\u0001"+
+		"\u0000\u0000\u0000?;\u0001\u0000\u0000\u0000@\u0005\u0001\u0000\u0000"+
+		"\u0000AB\u0006\u0003\uffff\uffff\u0000BC\u0005\u0002\u0000\u0000CD\u0003"+
+		"\u0006\u0003\u0000DE\u0005\u0003\u0000\u0000EP\u0001\u0000\u0000\u0000"+
+		"FG\u0005#\u0000\u0000GP\u0003\u0006\u0003\u0006HP\u0003\u0004\u0002\u0000"+
+		"IJ\u0005$\u0000\u0000JK\u0007\u0001\u0000\u0000KP\u0005$\u0000\u0000L"+
+		"M\u0005#\u0000\u0000MP\u0005$\u0000\u0000NP\u0003 \u0010\u0000OA\u0001"+
+		"\u0000\u0000\u0000OF\u0001\u0000\u0000\u0000OH\u0001\u0000\u0000\u0000"+
+		"OI\u0001\u0000\u0000\u0000OL\u0001\u0000\u0000\u0000ON\u0001\u0000\u0000"+
+		"\u0000PV\u0001\u0000\u0000\u0000QR\n\u0005\u0000\u0000RS\u0007\u0002\u0000"+
+		"\u0000SU\u0003\u0006\u0003\u0006TQ\u0001\u0000\u0000\u0000UX\u0001\u0000"+
+		"\u0000\u0000VT\u0001\u0000\u0000\u0000VW\u0001\u0000\u0000\u0000W\u0007"+
+		"\u0001\u0000\u0000\u0000XV\u0001\u0000\u0000\u0000YZ\u0005\u0004\u0000"+
+		"\u0000Z[\u0005$\u0000\u0000[\\\u0005\u0005\u0000\u0000\\h\u0005%\u0000"+
+		"\u0000]^\u0005\u0006\u0000\u0000^_\u0005$\u0000\u0000_`\u0005\u0005\u0000"+
+		"\u0000`h\u0005&\u0000\u0000ab\u0005\u0007\u0000\u0000bc\u0005$\u0000\u0000"+
+		"cd\u0005\u0005\u0000\u0000dh\u0003\u0006\u0003\u0000ef\u0007\u0003\u0000"+
+		"\u0000fh\u0005$\u0000\u0000gY\u0001\u0000\u0000\u0000g]\u0001\u0000\u0000"+
+		"\u0000ga\u0001\u0000\u0000\u0000ge\u0001\u0000\u0000\u0000h\t\u0001\u0000"+
+		"\u0000\u0000ij\u0005$\u0000\u0000jk\u0005\u0005\u0000\u0000kv\u0003\u001e"+
+		"\u000f\u0000lm\u0005$\u0000\u0000mn\u0005\u001f\u0000\u0000nv\u0005\u001f"+
+		"\u0000\u0000op\u0005$\u0000\u0000pq\u0005 \u0000\u0000qv\u0005 \u0000"+
+		"\u0000rs\u0005$\u0000\u0000st\u0005\u0005\u0000\u0000tv\u0003\u0014\n"+
+		"\u0000ui\u0001\u0000\u0000\u0000ul\u0001\u0000\u0000\u0000uo\u0001\u0000"+
 		"\u0000\u0000ur\u0001\u0000\u0000\u0000v\u000b\u0001\u0000\u0000\u0000"+
 		"wx\u0005\u0004\u0000\u0000xy\u0005$\u0000\u0000yz\u0005\u0005\u0000\u0000"+
 		"z\u0084\u0005$\u0000\u0000{|\u0005\u0006\u0000\u0000|}\u0005$\u0000\u0000"+
@@ -1593,53 +1845,53 @@ public class cloveParser extends Parser {
 		"\u0005\u0002\u0000\u0000\u0087\u0088\u0005$\u0000\u0000\u0088\u008c\u0005"+
 		"\u0003\u0000\u0000\u0089\u008a\u0005\b\u0000\u0000\u008a\u008c\u0003\u001e"+
 		"\u000f\u0000\u008b\u0085\u0001\u0000\u0000\u0000\u008b\u0089\u0001\u0000"+
-		"\u0000\u0000\u008c\u000f\u0001\u0000\u0000\u0000\u008d\u008e\u0003\u0002"+
-		"\u0001\u0000\u008e\u0011\u0001\u0000\u0000\u0000\u008f\u0090\u0003\u0002"+
-		"\u0001\u0000\u0090\u0013\u0001\u0000\u0000\u0000\u0091\u0092\u0005\t\u0000"+
-		"\u0000\u0092\u0093\u0003\u0006\u0003\u0000\u0093\u0097\u0005\n\u0000\u0000"+
-		"\u0094\u0095\u0003\u0010\b\u0000\u0095\u0096\u0005\u0001\u0000\u0000\u0096"+
-		"\u0098\u0001\u0000\u0000\u0000\u0097\u0094\u0001\u0000\u0000\u0000\u0098"+
-		"\u0099\u0001\u0000\u0000\u0000\u0099\u0097\u0001\u0000\u0000\u0000\u0099"+
-		"\u009a\u0001\u0000\u0000\u0000\u009a\u009b\u0001\u0000\u0000\u0000\u009b"+
-		"\u00a9\u0005\u000b\u0000\u0000\u009c\u009d\u0005\f\u0000\u0000\u009d\u00a1"+
-		"\u0005\n\u0000\u0000\u009e\u009f\u0003\u0012\t\u0000\u009f\u00a0\u0005"+
-		"\u0001\u0000\u0000\u00a0\u00a2\u0001\u0000\u0000\u0000\u00a1\u009e\u0001"+
-		"\u0000\u0000\u0000\u00a2\u00a3\u0001\u0000\u0000\u0000\u00a3\u00a1\u0001"+
-		"\u0000\u0000\u0000\u00a3\u00a4\u0001\u0000\u0000\u0000\u00a4\u00a5\u0001"+
-		"\u0000\u0000\u0000\u00a5\u00a6\u0005\u000b\u0000\u0000\u00a6\u00a8\u0001"+
-		"\u0000\u0000\u0000\u00a7\u009c\u0001\u0000\u0000\u0000\u00a8\u00ab\u0001"+
-		"\u0000\u0000\u0000\u00a9\u00a7\u0001\u0000\u0000\u0000\u00a9\u00aa\u0001"+
-		"\u0000\u0000\u0000\u00aa\u0015\u0001\u0000\u0000\u0000\u00ab\u00a9\u0001"+
-		"\u0000\u0000\u0000\u00ac\u00ad\u0005\r\u0000\u0000\u00ad\u00ae\u0003\u0006"+
-		"\u0003\u0000\u00ae\u00b2\u0005\n\u0000\u0000\u00af\u00b0\u0003\u0002\u0001"+
-		"\u0000\u00b0\u00b1\u0005\u0001\u0000\u0000\u00b1\u00b3\u0001\u0000\u0000"+
-		"\u0000\u00b2\u00af\u0001\u0000\u0000\u0000\u00b3\u00b4\u0001\u0000\u0000"+
-		"\u0000\u00b4\u00b2\u0001\u0000\u0000\u0000\u00b4\u00b5\u0001\u0000\u0000"+
-		"\u0000\u00b5\u00b6\u0001\u0000\u0000\u0000\u00b6\u00b7\u0005\u000b\u0000"+
-		"\u0000\u00b7\u0017\u0001\u0000\u0000\u0000\u00b8\u00b9\u0003\u0006\u0003"+
-		"\u0000\u00b9\u00ba\u0005\u000e\u0000\u0000\u00ba\u00bb\u0003\u0002\u0001"+
-		"\u0000\u00bb\u00bc\u0005\u000f\u0000\u0000\u00bc\u00bd\u0003\u0002\u0001"+
-		"\u0000\u00bd\u0019\u0001\u0000\u0000\u0000\u00be\u00bf\u0005\u0010\u0000"+
-		"\u0000\u00bf\u00c2\u0005\u0002\u0000\u0000\u00c0\u00c3\u0003\b\u0004\u0000"+
-		"\u00c1\u00c3\u0003\n\u0005\u0000\u00c2\u00c0\u0001\u0000\u0000\u0000\u00c2"+
-		"\u00c1\u0001\u0000\u0000\u0000\u00c3\u00c4\u0001\u0000\u0000\u0000\u00c4"+
-		"\u00c5\u0005\u0001\u0000\u0000\u00c5\u00c6\u0003\u0004\u0002\u0000\u00c6"+
-		"\u00c7\u0005\u0001\u0000\u0000\u00c7\u00c8\u0003\n\u0005\u0000\u00c8\u00c9"+
-		"\u0005\u0003\u0000\u0000\u00c9\u00cd\u0005\n\u0000\u0000\u00ca\u00cb\u0003"+
-		"\u0002\u0001\u0000\u00cb\u00cc\u0005\u0001\u0000\u0000\u00cc\u00ce\u0001"+
-		"\u0000\u0000\u0000\u00cd\u00ca\u0001\u0000\u0000\u0000\u00ce\u00cf\u0001"+
-		"\u0000\u0000\u0000\u00cf\u00cd\u0001\u0000\u0000\u0000\u00cf\u00d0\u0001"+
-		"\u0000\u0000\u0000\u00d0\u00d1\u0001\u0000\u0000\u0000\u00d1\u00d2\u0005"+
-		"\u000b\u0000\u0000\u00d2\u001b\u0001\u0000\u0000\u0000\u00d3\u00d4\u0005"+
-		"\u0010\u0000\u0000\u00d4\u00d5\u0005$\u0000\u0000\u00d5\u00d6\u0005\u0011"+
-		"\u0000\u0000\u00d6\u00d7\u0005\u0012\u0000\u0000\u00d7\u00d8\u0005\u0002"+
-		"\u0000\u0000\u00d8\u00d9\u0005%\u0000\u0000\u00d9\u00da\u0005\u0013\u0000"+
-		"\u0000\u00da\u00db\u0005%\u0000\u0000\u00db\u00dc\u0005\u0003\u0000\u0000"+
-		"\u00dc\u00e0\u0005\n\u0000\u0000\u00dd\u00de\u0003\u0002\u0001\u0000\u00de"+
-		"\u00df\u0005\u0001\u0000\u0000\u00df\u00e1\u0001\u0000\u0000\u0000\u00e0"+
-		"\u00dd\u0001\u0000\u0000\u0000\u00e1\u00e2\u0001\u0000\u0000\u0000\u00e2"+
-		"\u00e0\u0001\u0000\u0000\u0000\u00e2\u00e3\u0001\u0000\u0000\u0000\u00e3"+
-		"\u00e4\u0001\u0000\u0000\u0000\u00e4\u00e5\u0005\u000b\u0000\u0000\u00e5"+
+		"\u0000\u0000\u008c\u000f\u0001\u0000\u0000\u0000\u008d\u008e\u0005\t\u0000"+
+		"\u0000\u008e\u008f\u0003\u0006\u0003\u0000\u008f\u0093\u0005\n\u0000\u0000"+
+		"\u0090\u0091\u0003\u001a\r\u0000\u0091\u0092\u0005\u0001\u0000\u0000\u0092"+
+		"\u0094\u0001\u0000\u0000\u0000\u0093\u0090\u0001\u0000\u0000\u0000\u0094"+
+		"\u0095\u0001\u0000\u0000\u0000\u0095\u0093\u0001\u0000\u0000\u0000\u0095"+
+		"\u0096\u0001\u0000\u0000\u0000\u0096\u0097\u0001\u0000\u0000\u0000\u0097"+
+		"\u00a5\u0005\u000b\u0000\u0000\u0098\u0099\u0005\f\u0000\u0000\u0099\u009d"+
+		"\u0005\n\u0000\u0000\u009a\u009b\u0003\u001c\u000e\u0000\u009b\u009c\u0005"+
+		"\u0001\u0000\u0000\u009c\u009e\u0001\u0000\u0000\u0000\u009d\u009a\u0001"+
+		"\u0000\u0000\u0000\u009e\u009f\u0001\u0000\u0000\u0000\u009f\u009d\u0001"+
+		"\u0000\u0000\u0000\u009f\u00a0\u0001\u0000\u0000\u0000\u00a0\u00a1\u0001"+
+		"\u0000\u0000\u0000\u00a1\u00a2\u0005\u000b\u0000\u0000\u00a2\u00a4\u0001"+
+		"\u0000\u0000\u0000\u00a3\u0098\u0001\u0000\u0000\u0000\u00a4\u00a7\u0001"+
+		"\u0000\u0000\u0000\u00a5\u00a3\u0001\u0000\u0000\u0000\u00a5\u00a6\u0001"+
+		"\u0000\u0000\u0000\u00a6\u0011\u0001\u0000\u0000\u0000\u00a7\u00a5\u0001"+
+		"\u0000\u0000\u0000\u00a8\u00a9\u0005\r\u0000\u0000\u00a9\u00aa\u0003\u0006"+
+		"\u0003\u0000\u00aa\u00ae\u0005\n\u0000\u0000\u00ab\u00ac\u0003\u0002\u0001"+
+		"\u0000\u00ac\u00ad\u0005\u0001\u0000\u0000\u00ad\u00af\u0001\u0000\u0000"+
+		"\u0000\u00ae\u00ab\u0001\u0000\u0000\u0000\u00af\u00b0\u0001\u0000\u0000"+
+		"\u0000\u00b0\u00ae\u0001\u0000\u0000\u0000\u00b0\u00b1\u0001\u0000\u0000"+
+		"\u0000\u00b1\u00b2\u0001\u0000\u0000\u0000\u00b2\u00b3\u0005\u000b\u0000"+
+		"\u0000\u00b3\u0013\u0001\u0000\u0000\u0000\u00b4\u00b5\u0003\u0006\u0003"+
+		"\u0000\u00b5\u00b6\u0005\u000e\u0000\u0000\u00b6\u00b7\u0003\u0002\u0001"+
+		"\u0000\u00b7\u00b8\u0005\u000f\u0000\u0000\u00b8\u00b9\u0003\u0002\u0001"+
+		"\u0000\u00b9\u0015\u0001\u0000\u0000\u0000\u00ba\u00bb\u0005\u0010\u0000"+
+		"\u0000\u00bb\u00be\u0005\u0002\u0000\u0000\u00bc\u00bf\u0003\b\u0004\u0000"+
+		"\u00bd\u00bf\u0003\n\u0005\u0000\u00be\u00bc\u0001\u0000\u0000\u0000\u00be"+
+		"\u00bd\u0001\u0000\u0000\u0000\u00bf\u00c0\u0001\u0000\u0000\u0000\u00c0"+
+		"\u00c1\u0005\u0001\u0000\u0000\u00c1\u00c2\u0003\u0004\u0002\u0000\u00c2"+
+		"\u00c3\u0005\u0001\u0000\u0000\u00c3\u00c4\u0003\n\u0005\u0000\u00c4\u00c5"+
+		"\u0005\u0003\u0000\u0000\u00c5\u00c9\u0005\n\u0000\u0000\u00c6\u00c7\u0003"+
+		"\u0002\u0001\u0000\u00c7\u00c8\u0005\u0001\u0000\u0000\u00c8\u00ca\u0001"+
+		"\u0000\u0000\u0000\u00c9\u00c6\u0001\u0000\u0000\u0000\u00ca\u00cb\u0001"+
+		"\u0000\u0000\u0000\u00cb\u00c9\u0001\u0000\u0000\u0000\u00cb\u00cc\u0001"+
+		"\u0000\u0000\u0000\u00cc\u00cd\u0001\u0000\u0000\u0000\u00cd\u00ce\u0005"+
+		"\u000b\u0000\u0000\u00ce\u0017\u0001\u0000\u0000\u0000\u00cf\u00d0\u0005"+
+		"\u0010\u0000\u0000\u00d0\u00d1\u0005$\u0000\u0000\u00d1\u00d2\u0005\u0011"+
+		"\u0000\u0000\u00d2\u00d3\u0005\u0012\u0000\u0000\u00d3\u00d4\u0005\u0002"+
+		"\u0000\u0000\u00d4\u00d5\u0005%\u0000\u0000\u00d5\u00d6\u0005\u0013\u0000"+
+		"\u0000\u00d6\u00d7\u0005%\u0000\u0000\u00d7\u00d8\u0005\u0003\u0000\u0000"+
+		"\u00d8\u00dc\u0005\n\u0000\u0000\u00d9\u00da\u0003\u0002\u0001\u0000\u00da"+
+		"\u00db\u0005\u0001\u0000\u0000\u00db\u00dd\u0001\u0000\u0000\u0000\u00dc"+
+		"\u00d9\u0001\u0000\u0000\u0000\u00dd\u00de\u0001\u0000\u0000\u0000\u00de"+
+		"\u00dc\u0001\u0000\u0000\u0000\u00de\u00df\u0001\u0000\u0000\u0000\u00df"+
+		"\u00e0\u0001\u0000\u0000\u0000\u00e0\u00e1\u0005\u000b\u0000\u0000\u00e1"+
+		"\u0019\u0001\u0000\u0000\u0000\u00e2\u00e3\u0003\u0002\u0001\u0000\u00e3"+
+		"\u001b\u0001\u0000\u0000\u0000\u00e4\u00e5\u0003\u0002\u0001\u0000\u00e5"+
 		"\u001d\u0001\u0000\u0000\u0000\u00e6\u00e7\u0006\u000f\uffff\uffff\u0000"+
 		"\u00e7\u00e8\u0005\u0002\u0000\u0000\u00e8\u00e9\u0003\u001e\u000f\u0000"+
 		"\u00e9\u00ea\u0005\u0003\u0000\u0000\u00ea\u00ee\u0001\u0000\u0000\u0000"+
@@ -1653,7 +1905,7 @@ public class cloveParser extends Parser {
 		"\u0000\u0000\u00f7\u00f5\u0001\u0000\u0000\u0000\u00f7\u00f8\u0001\u0000"+
 		"\u0000\u0000\u00f8\u001f\u0001\u0000\u0000\u0000\u00f9\u00f7\u0001\u0000"+
 		"\u0000\u0000\u00fa\u00fb\u0007\u0006\u0000\u0000\u00fb!\u0001\u0000\u0000"+
-		"\u0000\u0013\'5?OVgu\u0083\u008b\u0099\u00a3\u00a9\u00b4\u00c2\u00cf\u00e2"+
+		"\u0000\u0013\'5?OVgu\u0083\u008b\u0095\u009f\u00a5\u00b0\u00be\u00cb\u00de"+
 		"\u00ed\u00f5\u00f7";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
