@@ -12,7 +12,7 @@ Up until Milestone 1:
 
 
 3. Akshata Vijay Kulkarni (akulka89):
-* Implemented the grammar for Declarative Statements for data types and the assignment operators.
+* Implemented the grammar for Declarative Statements for data types and the assignment operators, also the arithematic expressions.
 
 
 4. Sahil Tarun Parwani (sparwan1):

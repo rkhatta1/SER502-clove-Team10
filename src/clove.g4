@@ -18,6 +18,34 @@ statement : expr                                            // Expression statem
           | forEachLoop                                      // For each loop statement
           ;
 
+// Define token literals for relational operators
+EQUAL      : '==' ;
+NOTEQUAL   : '!=' ;
+LESST      : '<'  ;
+GREATERT      : '>'  ;
+LESSTEQUAL     : '<=' ;
+GREATERTEQUAL     : '>=' ;
+
+// Define relational expressions
+relational_expr : '(' relational_expr ')'                   // Parenthesized relational expression
+                | expr relationalOp=(EQUAL|NOTEQUAL|LESST|GREATERT|LESSTEQUAL|GREATERTEQUAL) expr     // Relational expression
+                ;
+
+// Define token literals for boolean operators
+AND     : 'and';
+OR      : 'or' ;
+NOT     : 'not';
+
+// Define conditions used in control flow constructs
+condition : '(' condition ')'                                // Parenthesized condition
+          | NOT condition                                    // Negation of condition
+          | condition booleanOp=(AND|OR) condition           // Condition with logical AND or OR
+          | relational_expr                                  // Relational expression as condition
+          | ID booleanOp=(AND|OR|NOT) ID                     // Condition comparing IDs with boolean operators
+          | NOT ID                                           // Negation of ID
+          | bool                                             // Boolean literal as condition
+          ;
+
 // Define various types of declaration statements
 declarativeStatement : 'int' ID '=' NUM                      // Integer initialization statement
                      | 'Str' ID '=' Str                      // String initialization statement
@@ -37,6 +65,14 @@ idAssignmentStatement : 'int' ID '=' ID                      // Integer ID initi
                       | 'Str' ID '=' ID                     // String ID initialization
                       | 'bool' ID '=' ID                   // Boolean ID initialization
                       ;
+
+
+// Define token literals for arithmetic operators
+MOD     : '%';
+DIVIDE     : '/';
+MULTIPLY    : '*';
+ADD     : '+';
+SUBTRACT     : '-' ;
 
 // Define expressions
 expr :  '(' expr ')'                                        // Parenthesized expression
