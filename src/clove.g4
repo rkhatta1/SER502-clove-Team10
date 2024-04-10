@@ -66,6 +66,18 @@ idAssignmentStatement : 'int' ID '=' ID                      // Integer ID initi
                       | 'bool' ID '=' ID                   // Boolean ID initialization
                       ;
 
+// Define while loops
+whileStatement : 'while' condition '{' (statement ';')+ '}' ;
+
+// Define the ternary operator
+ternaryOperator : condition '?' statement ':' statement ;
+
+// Define traditional for loops
+forLoop : 'for' '(' (declarativeStatement | assignmentStatement) ';' relational_expr ';' assignmentStatement ')' '{' (statement ';')+ '}' ;
+
+// Define for each loops
+forEachLoop : 'for' ID 'in' 'range' '('NUM ',' NUM ')' '{' (statement ';')+ '}';
+
 
 // Define token literals for arithmetic operators
 MOD     : '%';

@@ -16,7 +16,7 @@ Up until Milestone 1:
 
 
 4. Sahil Tarun Parwani (sparwan1):
-* Implemented the grammar for print function, whitespace handling and comments.
+* Implemented the grammar for if-then-else, print function, whitespace handling and comments.
 
 
 
