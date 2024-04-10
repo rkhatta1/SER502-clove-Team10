@@ -31,10 +31,12 @@ relational_expr : '(' relational_expr ')'                   // Parenthesized rel
                 | expr relationalOp=(EQUAL|NOTEQUAL|LESST|GREATERT|LESSTEQUAL|GREATERTEQUAL) expr     // Relational expression
                 ;
 
-// Define token literals for boolean operators
-AND     : 'and';
-OR      : 'or' ;
-NOT     : 'not';
+// Define token literals for arithmetic operators
+MOD     : '%';
+DIVIDE     : '/';
+MULTIPLY    : '*';
+ADD     : '+';
+SUBTRACT     : '-' ;
 
 // Define conditions used in control flow constructs
 condition : '(' condition ')'                                // Parenthesized condition
@@ -66,6 +68,21 @@ idAssignmentStatement : 'int' ID '=' ID                      // Integer ID initi
                       | 'bool' ID '=' ID                   // Boolean ID initialization
                       ;
 
+// Define various types of print statements
+printStatement : 'print' '(' ID ')'                        // Print identifier
+                | 'print' expr                             // Print expression
+                ;
+
+ifStatements : statement
+             ;
+
+elseStatements : statement
+                ;
+
+// Define if statements with optional else clauses
+conditionStatement : 'if' condition '{' (ifStatements ';')+ '}' ('else' '{' (elseStatements ';')+ '}')*
+                   ;
+
 // Define while loops
 whileStatement : 'while' condition '{' (statement ';')+ '}' ;
 
@@ -78,13 +95,10 @@ forLoop : 'for' '(' (declarativeStatement | assignmentStatement) ';' relational_
 // Define for each loops
 forEachLoop : 'for' ID 'in' 'range' '('NUM ',' NUM ')' '{' (statement ';')+ '}';
 
-
-// Define token literals for arithmetic operators
-MOD     : '%';
-DIVIDE     : '/';
-MULTIPLY    : '*';
-ADD     : '+';
-SUBTRACT     : '-' ;
+// Define token literals for boolean operators
+AND     : 'and';
+OR      : 'or' ;
+NOT     : 'not';
 
 // Define expressions
 expr :  '(' expr ')'                                        // Parenthesized expression
@@ -109,3 +123,10 @@ NUM : '0'
 
 Str    : '"' ~('"')+ '"'
           ;
+
+// Define whitespace and comment handling rules
+WS  : [ \t\r\n]+ -> skip;
+
+COMMENT
+ : '$' ~[\r\n]* -> skip
+ ;
