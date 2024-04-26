@@ -56,17 +56,73 @@ public class CloveVisitor extends CloveGrammarBaseVisitor {
 
     @Override
     public Object visitAssignmentOperatorStatement(CloveGrammarParser.AssignmentOperatorStatementContext ctx) {
-        return null;
+
+        String id = ctx.ID().getText();
+        String expr = visit(ctx.expr()).toString();
+        boolean modified = false;
+
+        // Check if the variable exists in any data type environment
+        for (HashMap<String, String> dataTypeEnvironment : environment.values()) {
+            if (dataTypeEnvironment.containsKey(id)) {
+                dataTypeEnvironment.put(id, expr);
+                modified = true;
+                break;
+            }
+        }
+
+        if (!modified) {
+            errors.append(String.format("ERROR: Variable '%s' not found in the environment \n", id));
+            System.out.println(errors);
+            System.exit(0);
+        }
+
+        return 0;
     }
 
     @Override
     public Object visitIncrementOperation(CloveGrammarParser.IncrementOperationContext ctx) {
-        return null;
+        String id = ctx.ID().getText();
+        HashMap<String, String> dataTypeEnvironment = environment.get("Integers");
+
+        if (dataTypeEnvironment == null || !dataTypeEnvironment.containsKey(id)) {
+            String errorMessage;
+            if (dataTypeEnvironment == null) {
+                errorMessage = "not found in the environment";
+            } else {
+                errorMessage = "not initialized in the environment";
+            }
+            errors.append(String.format("ERROR: Variable '%s' %s for the increment statement\n", id, errorMessage));
+            System.out.println(errors);
+            return 0; // No need for System.exit(0)
+        }
+
+        String currentValue = dataTypeEnvironment.get(id);
+        int newValue = Integer.parseInt(currentValue) + 1;
+        dataTypeEnvironment.put(id, Integer.toString(newValue));
+        return 0;
     }
 
     @Override
     public Object visitDecrementOperation(CloveGrammarParser.DecrementOperationContext ctx) {
-        return null;
+        String id = ctx.ID().getText();
+        HashMap<String, String> dataTypeEnvironment = environment.get("Integers");
+
+        if (dataTypeEnvironment == null || !dataTypeEnvironment.containsKey(id)) {
+            String errorMessage;
+            if (dataTypeEnvironment == null) {
+                errorMessage = "not found in the environment";
+            } else {
+                errorMessage = "not initialized in the environment";
+            }
+            errors.append(String.format("ERROR: Variable '%s' %s for the decrement statement\n", id, errorMessage));
+            System.out.println(errors);
+            return 0; // No need for System.exit(0)
+        }
+
+        String currentValue = dataTypeEnvironment.get(id);
+        int newValue = Integer.parseInt(currentValue) - 1;
+        dataTypeEnvironment.put(id, Integer.toString(newValue));
+        return 0;
     }
 
     @Override
