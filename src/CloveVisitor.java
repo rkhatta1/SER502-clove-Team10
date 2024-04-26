@@ -219,17 +219,56 @@ public class CloveVisitor extends CloveGrammarBaseVisitor {
 
     @Override
     public Object visitBooleanCondition(CloveGrammarParser.BooleanConditionContext ctx) {
-        return null;
+        boolean flag = true;
+
+        if (ctx.getText().equals("true")) {
+            flag = true;
+        } else if (ctx.getText().equals("false")) {
+            flag = false;
+        } else {
+            errors.append("ERROR: Not valid entry for boolean!\n");
+            System.out.println(errors);
+            System.exit(0);
+        }
+
+        return flag;
     }
 
     @Override
     public Object visitConditionConnector(CloveGrammarParser.ConditionConnectorContext ctx) {
-        return null;
+        if (ctx.getChildCount() == 3) {
+
+            boolean leftResult = (boolean) visit(ctx.condition(0));
+            boolean rightResult = (boolean) visit(ctx.condition(1));
+
+            if (ctx.booleanOp.getText().equals("and")) {
+                return leftResult && rightResult;
+            } else if (ctx.booleanOp.getText().equals("or")) {
+                return leftResult || rightResult;
+            }
+
+        } else {
+            return visit(ctx);
+        }
+
+        return visit(ctx);
     }
 
     @Override
     public Object visitNotIDBoolean(CloveGrammarParser.NotIDBooleanContext ctx) {
-        return null;
+        String id = ctx.ID().getText();
+        boolean result = true;
+
+        if (!environment.get("Booleans").containsKey(id)) {
+            System.out.println("Variable already there");
+            errors.append("ERROR: Variable '").append(id).append("' already initialized for the boolean\n");
+            System.exit(0);
+        } else {
+            String value = environment.get("Booleans").get(id);
+            result = Boolean.parseBoolean(value);
+        }
+
+        return !result;
     }
 
     @Override
