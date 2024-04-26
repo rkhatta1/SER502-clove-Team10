@@ -147,27 +147,64 @@ public class CloveVisitor extends CloveGrammarBaseVisitor {
 
     @Override
     public Object visitIfThenElseCondition(CloveGrammarParser.IfThenElseConditionContext ctx) {
-        return null;
+        int ifStmtCount = ctx.ifStatements().size();
+        int elseStmtCount = ctx.elseStatements().size();
+        int i, j;
+
+        boolean result = (boolean) visit(ctx.condition());
+        if (result) {
+            for (i = 0; i < ifStmtCount; i++) {
+                visit(ctx.ifStatements(i));
+            }
+        } else if (ctx.elseStatements(0) != null) {
+            for (j = 0; j < elseStmtCount; j++) {
+                visit(ctx.elseStatements(j));
+            }
+        }
+        return 0;
     }
 
     @Override
     public Object visitIfStatements(CloveGrammarParser.IfStatementsContext ctx) {
-        return null;
+        return visit(ctx.statement());
     }
 
     @Override
     public Object visitElseStatements(CloveGrammarParser.ElseStatementsContext ctx) {
-        return null;
+        return visit(ctx.statement());
     }
 
     @Override
     public Object visitWhileCondition(CloveGrammarParser.WhileConditionContext ctx) {
-        return null;
+
+        boolean res = (boolean) this.visit(ctx.condition());
+
+        int statementCnt = ctx.statement().size();
+        int i;
+
+        while (res) {
+
+            for (i = 0; i < statementCnt; i++) {
+                visit(ctx.statement(i));
+            }
+            res = (boolean) this.visit(ctx.condition());
+        }
+        return 0;
     }
 
     @Override
     public Object visitTernaryOperatorOperation(CloveGrammarParser.TernaryOperatorOperationContext ctx) {
-        return null;
+        int value = 0;
+
+        boolean conditionStmt = (boolean) this.visit(ctx.condition());
+        if (conditionStmt) {
+            value = (int) visit(ctx.statement(0));
+        }
+        if (!conditionStmt) {
+            value = (int) visit(ctx.statement(1));
+        }
+
+        return value;
     }
 
     @Override
