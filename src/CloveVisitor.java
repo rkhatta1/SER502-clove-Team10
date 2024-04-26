@@ -93,7 +93,7 @@ public class CloveVisitor extends CloveGrammarBaseVisitor {
             }
             errors.append(String.format("ERROR: Variable '%s' %s for the increment statement\n", id, errorMessage));
             System.out.println(errors);
-            return 0; // No need for System.exit(0)
+            return 0;
         }
 
         String currentValue = dataTypeEnvironment.get(id);
@@ -116,7 +116,7 @@ public class CloveVisitor extends CloveGrammarBaseVisitor {
             }
             errors.append(String.format("ERROR: Variable '%s' %s for the decrement statement\n", id, errorMessage));
             System.out.println(errors);
-            return 0; // No need for System.exit(0)
+            return 0;
         }
 
         String currentValue = dataTypeEnvironment.get(id);
@@ -127,18 +127,52 @@ public class CloveVisitor extends CloveGrammarBaseVisitor {
 
     @Override
     public Object visitTernaryOperatorAssignment(CloveGrammarParser.TernaryOperatorAssignmentContext ctx) {
-        return null;
+        String id = ctx.ID().getText();
+        String resultExpression = visit(ctx.ternaryOperator()).toString();
+        boolean dataUpdated = false;
+
+        for (HashMap<String, String> dataTypeEnvironment : environment.values()) {
+            if (dataTypeEnvironment.containsKey(id)) {
+                dataTypeEnvironment.put(id, resultExpression);
+                dataUpdated = true;
+                break;
+            }
+        }
+
+        if (!dataUpdated) {
+            errors.append(String.format("ERROR: Variable '%s' not found in the environment\n", id));
+            System.out.println(errors);
+            return 0;
+        }
+        return 0;
     }
 
 
     @Override
     public Object visitPrintFunctionIdentifier(CloveGrammarParser.PrintFunctionIdentifierContext ctx) {
+        String id = ctx.ID().getText();
+        String val = "";
+
+        for (HashMap<String, String> dataTypeEnvironment : environment.values()) {
+            if (dataTypeEnvironment.containsKey(id)) {
+                val = dataTypeEnvironment.get(id);
+                System.out.println("PRINTED VALUE: " + val);
+                return val;
+            }
+        }
+
+        errors.append(String.format("ERROR: Variable '%s' not found in the environment for the print statement\n", id));
+        System.out.println(errors);
         return null;
     }
 
     @Override
     public Object visitPrintFunctionExpression(CloveGrammarParser.PrintFunctionExpressionContext ctx) {
-        return null;
+        String resExpr = visit(ctx.expr()).toString();
+
+        System.out.println("PRINTED: " + resExpr);
+
+        return resExpr;
     }
 
     @Override
