@@ -9,7 +9,7 @@ public class CloveGrammar {
 
     public static void main(String[] args) throws IOException {
 
-        String filePath = "./data/testProgram1.eqi";
+        String filePath = "../data/testProgram1.clove";
 
         // The first command line argument should be the name of the Equilibrium source file to be executed
         if(args.length > 0) {
