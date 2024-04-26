@@ -300,22 +300,68 @@ public class CloveVisitor extends CloveGrammarBaseVisitor {
 
     @Override
     public Object visitIdExpression(CloveGrammarParser.IdExpressionContext ctx) {
-        return null;
+        int value = 0;
+        String id = ctx.ID().getText();
+        boolean foundVariable = false;
+        boolean initializedVariable = true;
+
+        for (String dataTypes : environment.keySet()) {
+            HashMap<String, String> innerMap = environment.get(dataTypes);
+            if (innerMap.containsKey(id)) {
+                if(innerMap.get(id)!=null) {
+                    value = parseInt(innerMap.get(id));
+                }else{
+                    initializedVariable = false;
+                }
+                foundVariable = true;
+            }
+            if (!foundVariable) {
+                errors.append("ERROR: Could not find relevant identifier in environment for '").append(ctx.ID().getText()).append("' variable.\n");
+                System.out.println(errors);
+                System.exit(0);
+            } else if (!initializedVariable) {
+                errors.append("ERROR: Variable '").append(ctx.ID().getText()).append("' is not initialized in the relevant environment for any operation\n");
+                System.out.println(errors);
+                System.exit(0);
+            } else {
+                return value;
+            }
+        }
+        return value;
     }
 
     @Override
     public Object visitNumExpression(CloveGrammarParser.NumExpressionContext ctx) {
-        return null;
+        return parseInt(ctx.NUM().getText());
     }
 
     @Override
     public Object visitArithmeticExpression(CloveGrammarParser.ArithmeticExpressionContext ctx) {
-        return null;
+        if (ctx.getChildCount() == 3) {
+            int leftValue = (int) visit(ctx.expr(0));
+            int rightValue = (int) visit(ctx.expr(1));
+            if((ctx.operation.getType()== CloveGrammarParser.DIVIDE || ctx.operation.getType()== CloveGrammarParser.MOD) && rightValue ==0){
+                errors.append("ERROR: Invalid arithmetic operation performed on the operators!\n");
+                System.out.println(errors);
+                System.exit(0);
+            }
+
+            return switch (ctx.operation.getType()) {
+                case CloveGrammarParser.ADD -> leftValue + rightValue;
+                case CloveGrammarParser.SUBTRACT -> leftValue - rightValue;
+                case CloveGrammarParser.MULTIPLY -> leftValue * rightValue;
+                case CloveGrammarParser.DIVIDE -> leftValue / rightValue;
+                case CloveGrammarParser.MOD -> leftValue % rightValue;
+                default -> throw new IllegalStateException("Unknown operator " + ctx.operation);
+            };
+        }
+
+        return 0;
     }
 
     @Override
     public Object visitParenthesesExpression(CloveGrammarParser.ParenthesesExpressionContext ctx) {
-        return null;
+        return visit(ctx.expr());
     }
 
     @Override
