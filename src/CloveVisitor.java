@@ -177,17 +177,44 @@ public class CloveVisitor extends CloveGrammarBaseVisitor {
 
     @Override
     public Object visitNotCondition(CloveGrammarParser.NotConditionContext ctx) {
-        return null;
+        boolean result = (boolean) visit(ctx.condition());
+        return !result;
     }
 
     @Override
     public Object visitConditionRelExpr(CloveGrammarParser.ConditionRelExprContext ctx) {
-        return null;
+        return visit(ctx.relational_expr());
     }
 
     @Override
     public Object visitBooleanIdOperation(CloveGrammarParser.BooleanIdOperationContext ctx) {
-        return null;
+        String id1 = ctx.ID(0).getText();
+        String id2 = ctx.ID(1).getText();
+
+        HashMap<String, String> booleanEnvironment = environment.get("Booleans");
+        if (booleanEnvironment == null) {
+            System.out.println("Environment does not contain boolean variables");
+            System.exit(0);
+        }
+
+        String val1 = booleanEnvironment.getOrDefault(id1, null);
+        String val2 = booleanEnvironment.getOrDefault(id2, null);
+
+        if (val1 == null || val2 == null) {
+            System.out.println("Variable not initialized for boolean operation");
+            errors.append("ERROR: One or both variables not initialized for the boolean operation\n");
+            System.exit(0);
+        }
+
+        Boolean b1 = Boolean.valueOf(val1);
+        Boolean b2 = Boolean.valueOf(val2);
+
+        return switch (ctx.booleanOp.getType()) {
+            case CloveGrammarParser.AND -> b1 && b2;
+            case CloveGrammarParser.OR -> b1 || b2;
+            case CloveGrammarParser.NOT -> b1 != b2;
+            default -> throw new IllegalStateException("Unknown operator " + ctx.booleanOp);
+        };
     }
 
     @Override
