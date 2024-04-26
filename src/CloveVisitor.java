@@ -273,12 +273,29 @@ public class CloveVisitor extends CloveGrammarBaseVisitor {
 
     @Override
     public Object visitParenthesesRelExpr(CloveGrammarParser.ParenthesesRelExprContext ctx) {
-        return null;
+        return visit(ctx.relational_expr());
     }
 
     @Override
     public Object visitRelExpr(CloveGrammarParser.RelExprContext ctx) {
-        return null;
+
+        if (ctx.getChildCount() == 3) {
+
+            int leftVal = (int) visit(ctx.expr(0));
+            int rightVal = (int) visit(ctx.expr(1));
+
+            return switch (ctx.relationalOp.getType()) {
+                case CloveGrammarParser.EQUAL -> leftVal == rightVal;
+                case CloveGrammarParser.NOTEQUAL -> leftVal != rightVal;
+                case CloveGrammarParser.GREATERT -> leftVal > rightVal;
+                case CloveGrammarParser.LESST -> leftVal < rightVal;
+                case CloveGrammarParser.GREATERTEQUAL -> leftVal >= rightVal;
+                case CloveGrammarParser.LESSTEQUAL -> leftVal <= rightVal;
+                default -> throw new IllegalStateException("Unknown operator " + ctx.relationalOp);
+            };
+        } else {
+            return 0;
+        }
     }
 
     @Override
