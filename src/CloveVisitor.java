@@ -56,48 +56,165 @@ public class CloveVisitor extends CloveGrammarBaseVisitor {
 
     @Override
     public Object visitAssignmentOperatorStatement(CloveGrammarParser.AssignmentOperatorStatementContext ctx) {
-        return null;
+
+        String id = ctx.ID().getText();
+        String expr = visit(ctx.expr()).toString();
+        boolean modified = false;
+
+        // Check if the variable exists in any data type environment
+        for (HashMap<String, String> dataTypeEnvironment : environment.values()) {
+            if (dataTypeEnvironment.containsKey(id)) {
+                dataTypeEnvironment.put(id, expr);
+                modified = true;
+                break;
+            }
+        }
+
+        if (!modified) {
+            errors.append(String.format("ERROR: Variable '%s' not found in the environment \n", id));
+            System.out.println(errors);
+            System.exit(0);
+        }
+
+        return 0;
     }
 
     @Override
     public Object visitIncrementOperation(CloveGrammarParser.IncrementOperationContext ctx) {
-        return null;
+        String id = ctx.ID().getText();
+        HashMap<String, String> dataTypeEnvironment = environment.get("Integers");
+
+        if (dataTypeEnvironment == null || !dataTypeEnvironment.containsKey(id)) {
+            String errorMessage;
+            if (dataTypeEnvironment == null) {
+                errorMessage = "not found in the environment";
+            } else {
+                errorMessage = "not initialized in the environment";
+            }
+            errors.append(String.format("ERROR: Variable '%s' %s for the increment statement\n", id, errorMessage));
+            System.out.println(errors);
+            return 0;
+        }
+
+        String currentValue = dataTypeEnvironment.get(id);
+        int newValue = Integer.parseInt(currentValue) + 1;
+        dataTypeEnvironment.put(id, Integer.toString(newValue));
+        return 0;
     }
 
     @Override
     public Object visitDecrementOperation(CloveGrammarParser.DecrementOperationContext ctx) {
-        return null;
+        String id = ctx.ID().getText();
+        HashMap<String, String> dataTypeEnvironment = environment.get("Integers");
+
+        if (dataTypeEnvironment == null || !dataTypeEnvironment.containsKey(id)) {
+            String errorMessage;
+            if (dataTypeEnvironment == null) {
+                errorMessage = "not found in the environment";
+            } else {
+                errorMessage = "not initialized in the environment";
+            }
+            errors.append(String.format("ERROR: Variable '%s' %s for the decrement statement\n", id, errorMessage));
+            System.out.println(errors);
+            return 0;
+        }
+
+        String currentValue = dataTypeEnvironment.get(id);
+        int newValue = Integer.parseInt(currentValue) - 1;
+        dataTypeEnvironment.put(id, Integer.toString(newValue));
+        return 0;
     }
 
     @Override
     public Object visitTernaryOperatorAssignment(CloveGrammarParser.TernaryOperatorAssignmentContext ctx) {
-        return null;
+        String id = ctx.ID().getText();
+        String resultExpression = visit(ctx.ternaryOperator()).toString();
+        boolean dataUpdated = false;
+
+        for (HashMap<String, String> dataTypeEnvironment : environment.values()) {
+            if (dataTypeEnvironment.containsKey(id)) {
+                dataTypeEnvironment.put(id, resultExpression);
+                dataUpdated = true;
+                break;
+            }
+        }
+
+        if (!dataUpdated) {
+            errors.append(String.format("ERROR: Variable '%s' not found in the environment\n", id));
+            System.out.println(errors);
+            return 0;
+        }
+        return 0;
     }
 
 
     @Override
     public Object visitPrintFunctionIdentifier(CloveGrammarParser.PrintFunctionIdentifierContext ctx) {
+        String id = ctx.ID().getText();
+        String val = "";
+
+        for (HashMap<String, String> dataTypeEnvironment : environment.values()) {
+            if (dataTypeEnvironment.containsKey(id)) {
+                val = dataTypeEnvironment.get(id);
+                System.out.println("PRINTED VALUE: " + val);
+                return val;
+            }
+        }
+
+        errors.append(String.format("ERROR: Variable '%s' not found in the environment for the print statement\n", id));
+        System.out.println(errors);
         return null;
     }
 
     @Override
     public Object visitPrintFunctionExpression(CloveGrammarParser.PrintFunctionExpressionContext ctx) {
-        return null;
+        String resExpr = visit(ctx.expr()).toString();
+
+        System.out.println("PRINTED: " + resExpr);
+
+        return resExpr;
     }
 
     @Override
     public Object visitNotCondition(CloveGrammarParser.NotConditionContext ctx) {
-        return null;
+        boolean result = (boolean) visit(ctx.condition());
+        return !result;
     }
 
     @Override
     public Object visitConditionRelExpr(CloveGrammarParser.ConditionRelExprContext ctx) {
-        return null;
+        return visit(ctx.relational_expr());
     }
 
     @Override
     public Object visitBooleanIdOperation(CloveGrammarParser.BooleanIdOperationContext ctx) {
-        return null;
+        String id1 = ctx.ID(0).getText();
+        String id2 = ctx.ID(1).getText();
+
+        HashMap<String, String> booleanEnvironment = environment.get("Booleans");
+        if (booleanEnvironment == null) {
+            System.out.println("Environment does not contain boolean variables");
+            System.exit(0);
+        }
+
+        String val1 = booleanEnvironment.getOrDefault(id1, null);
+        String val2 = booleanEnvironment.getOrDefault(id2, null);
+
+        if (val1 == null || val2 == null) {
+            System.out.println("Variable not initialized for boolean operation");
+            errors.append("ERROR: One or both variables not initialized for the boolean operation\n");
+            System.exit(0);
+        }
+
+        Boolean b1 = Boolean.valueOf(val1);
+        Boolean b2 = Boolean.valueOf(val2);
+
+        return switch (ctx.booleanOp.getType()) {
+            case CloveGrammarParser.AND -> b1 && b2;
+            case CloveGrammarParser.OR -> b1 || b2;
+            case CloveGrammarParser.NOT -> b1 != b2;
+            default -> throw new IllegalStateException("Unknown operator " + ctx.booleanOp);
+        };
     }
 
     @Override
