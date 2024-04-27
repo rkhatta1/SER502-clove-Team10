@@ -366,41 +366,133 @@ public class CloveVisitor extends CloveGrammarBaseVisitor {
 
     @Override
     public Object visitIfThenElseCondition(CloveGrammarParser.IfThenElseConditionContext ctx) {
-        return null;
+        int ifStmtCount = ctx.ifStatements().size();
+        int elseStmtCount = ctx.elseStatements().size();
+        int i, j;
+
+        boolean result = (boolean) visit(ctx.condition());
+        if (result) {
+            for (i = 0; i < ifStmtCount; i++) {
+                visit(ctx.ifStatements(i));
+            }
+        } else if (ctx.elseStatements(0) != null) {
+            for (j = 0; j < elseStmtCount; j++) {
+                visit(ctx.elseStatements(j));
+            }
+        }
+        return 0;
     }
 
     @Override
     public Object visitIfStatements(CloveGrammarParser.IfStatementsContext ctx) {
-        return null;
+        return visit(ctx.statement());
     }
 
     @Override
     public Object visitElseStatements(CloveGrammarParser.ElseStatementsContext ctx) {
-        return null;
+        return visit(ctx.statement());
     }
 
     @Override
     public Object visitWhileCondition(CloveGrammarParser.WhileConditionContext ctx) {
-        return null;
+
+        boolean res = (boolean) this.visit(ctx.condition());
+
+        int statementCnt = ctx.statement().size();
+        int i;
+
+        while (res) {
+
+            for (i = 0; i < statementCnt; i++) {
+                visit(ctx.statement(i));
+            }
+            res = (boolean) this.visit(ctx.condition());
+        }
+        return 0;
     }
 
     @Override
     public Object visitTernaryOperatorOperation(CloveGrammarParser.TernaryOperatorOperationContext ctx) {
-        return null;
+        int value = 0;
+
+        boolean conditionStmt = (boolean) this.visit(ctx.condition());
+        if (conditionStmt) {
+            value = (int) visit(ctx.statement(0));
+        }
+        if (!conditionStmt) {
+            value = (int) visit(ctx.statement(1));
+        }
+
+        return value;
     }
 
     @Override
     public Object visitTraditionalForLoop(CloveGrammarParser.TraditionalForLoopContext ctx) {
-        return null;
+        boolean flag = true;
+        if (ctx.declarativeStatement() != null) {
+            visit(ctx.declarativeStatement());
+            flag = false;
+        }
+        if (flag) {
+            visit(ctx.assignmentStatement(0));
+        }
+        boolean condition = (boolean) visit(ctx.relational_expr());
+
+        int statementCnt = ctx.statement().size();
+        int i;
+
+        while (condition) {
+            for (i = 0; i < statementCnt; i++) {
+                visit(ctx.statement(i));
+            }
+            if (flag) {
+                visit(ctx.assignmentStatement(1));
+            } else {
+                visit(ctx.assignmentStatement(0));
+            }
+            condition = (boolean) visit(ctx.relational_expr());
+        }
+        return 0;
     }
 
     @Override
     public Object visitForEachLoopCondition(CloveGrammarParser.ForEachLoopConditionContext ctx) {
-        return null;
+        String id = ctx.ID().getText();
+        String number1 = ctx.NUM(0).getText();
+        String number2 = ctx.NUM(1).getText();
+        int integerNum1 = Integer.parseInt(number1);
+        int integerNum2 = Integer.parseInt(number2);
+
+        if (environment.get("Integers").containsKey(id)) {
+            environment.get("Integers").put(id, number1);
+        } else {
+            errors.append("ERROR: Identifier '").append(ctx.ID().getText()).append("' not found in the for loop syntax!\n");
+            System.out.println(errors);
+            System.exit(0);
+        }
+
+        String newId = environment.get("Integers").get(id);
+
+        int statementCnt = ctx.statement().size();
+        int i;
+
+        while (parseInt(newId) < integerNum2) {
+
+            for (i = 0; i < statementCnt; i++) {
+                visit(ctx.statement(i));
+            }
+
+            integerNum1 = integerNum1 + 1;
+            environment.get("Integers").put(id, String.valueOf(integerNum1));
+            newId = environment.get("Integers").get(id);
+        }
+
+
+        return 0;
     }
 
     @Override
     public Object visitConditionWithParentheses(CloveGrammarParser.ConditionWithParenthesesContext ctx) {
-        return null;
+        return visit(ctx.condition());
     }
 }
