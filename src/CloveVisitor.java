@@ -219,47 +219,149 @@ public class CloveVisitor extends CloveGrammarBaseVisitor {
 
     @Override
     public Object visitBooleanCondition(CloveGrammarParser.BooleanConditionContext ctx) {
-        return null;
+        boolean flag = true;
+
+        if (ctx.getText().equals("true")) {
+            flag = true;
+        } else if (ctx.getText().equals("false")) {
+            flag = false;
+        } else {
+            errors.append("ERROR: Not valid entry for boolean!\n");
+            System.out.println(errors);
+            System.exit(0);
+        }
+
+        return flag;
     }
 
     @Override
     public Object visitConditionConnector(CloveGrammarParser.ConditionConnectorContext ctx) {
-        return null;
+        if (ctx.getChildCount() == 3) {
+
+            boolean leftResult = (boolean) visit(ctx.condition(0));
+            boolean rightResult = (boolean) visit(ctx.condition(1));
+
+            if (ctx.booleanOp.getText().equals("and")) {
+                return leftResult && rightResult;
+            } else if (ctx.booleanOp.getText().equals("or")) {
+                return leftResult || rightResult;
+            }
+
+        } else {
+            return visit(ctx);
+        }
+
+        return visit(ctx);
     }
 
     @Override
     public Object visitNotIDBoolean(CloveGrammarParser.NotIDBooleanContext ctx) {
-        return null;
+        String id = ctx.ID().getText();
+        boolean result = true;
+
+        if (!environment.get("Booleans").containsKey(id)) {
+            System.out.println("Variable already there");
+            errors.append("ERROR: Variable '").append(id).append("' already initialized for the boolean\n");
+            System.exit(0);
+        } else {
+            String value = environment.get("Booleans").get(id);
+            result = Boolean.parseBoolean(value);
+        }
+
+        return !result;
     }
 
     @Override
     public Object visitParenthesesRelExpr(CloveGrammarParser.ParenthesesRelExprContext ctx) {
-        return null;
+        return visit(ctx.relational_expr());
     }
 
     @Override
     public Object visitRelExpr(CloveGrammarParser.RelExprContext ctx) {
-        return null;
+
+        if (ctx.getChildCount() == 3) {
+
+            int leftVal = (int) visit(ctx.expr(0));
+            int rightVal = (int) visit(ctx.expr(1));
+
+            return switch (ctx.relationalOp.getType()) {
+                case CloveGrammarParser.EQUAL -> leftVal == rightVal;
+                case CloveGrammarParser.NOTEQUAL -> leftVal != rightVal;
+                case CloveGrammarParser.GREATERT -> leftVal > rightVal;
+                case CloveGrammarParser.LESST -> leftVal < rightVal;
+                case CloveGrammarParser.GREATERTEQUAL -> leftVal >= rightVal;
+                case CloveGrammarParser.LESSTEQUAL -> leftVal <= rightVal;
+                default -> throw new IllegalStateException("Unknown operator " + ctx.relationalOp);
+            };
+        } else {
+            return 0;
+        }
     }
 
     @Override
     public Object visitIdExpression(CloveGrammarParser.IdExpressionContext ctx) {
-        return null;
+        int value = 0;
+        String id = ctx.ID().getText();
+        boolean foundVariable = false;
+        boolean initializedVariable = true;
+
+        for (String dataTypes : environment.keySet()) {
+            HashMap<String, String> innerMap = environment.get(dataTypes);
+            if (innerMap.containsKey(id)) {
+                if(innerMap.get(id)!=null) {
+                    value = parseInt(innerMap.get(id));
+                }else{
+                    initializedVariable = false;
+                }
+                foundVariable = true;
+            }
+            if (!foundVariable) {
+                errors.append("ERROR: Could not find relevant identifier in environment for '").append(ctx.ID().getText()).append("' variable.\n");
+                System.out.println(errors);
+                System.exit(0);
+            } else if (!initializedVariable) {
+                errors.append("ERROR: Variable '").append(ctx.ID().getText()).append("' is not initialized in the relevant environment for any operation\n");
+                System.out.println(errors);
+                System.exit(0);
+            } else {
+                return value;
+            }
+        }
+        return value;
     }
 
     @Override
     public Object visitNumExpression(CloveGrammarParser.NumExpressionContext ctx) {
-        return null;
+        return parseInt(ctx.NUM().getText());
     }
 
     @Override
     public Object visitArithmeticExpression(CloveGrammarParser.ArithmeticExpressionContext ctx) {
-        return null;
+        if (ctx.getChildCount() == 3) {
+            int leftValue = (int) visit(ctx.expr(0));
+            int rightValue = (int) visit(ctx.expr(1));
+            if((ctx.operation.getType()== CloveGrammarParser.DIVIDE || ctx.operation.getType()== CloveGrammarParser.MOD) && rightValue ==0){
+                errors.append("ERROR: Invalid arithmetic operation performed on the operators!\n");
+                System.out.println(errors);
+                System.exit(0);
+            }
+
+            return switch (ctx.operation.getType()) {
+                case CloveGrammarParser.ADD -> leftValue + rightValue;
+                case CloveGrammarParser.SUBTRACT -> leftValue - rightValue;
+                case CloveGrammarParser.MULTIPLY -> leftValue * rightValue;
+                case CloveGrammarParser.DIVIDE -> leftValue / rightValue;
+                case CloveGrammarParser.MOD -> leftValue % rightValue;
+                default -> throw new IllegalStateException("Unknown operator " + ctx.operation);
+            };
+        }
+
+        return 0;
     }
 
     @Override
     public Object visitParenthesesExpression(CloveGrammarParser.ParenthesesExpressionContext ctx) {
-        return null;
+        return visit(ctx.expr());
     }
 
     @Override
