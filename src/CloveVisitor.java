@@ -39,8 +39,6 @@ public class CloveVisitor extends CloveGrammarBaseVisitor {
         }
 
         if (environment.get("Integers").containsKey(ctx.ID().getText())) {
-            // throw new RuntimeException("Variable already initialized :" +
-            // ctx.ID().getText());
             System.out.println("Variable already there");
             errors.append("ERROR: Variable '").append(ctx.ID().getText())
                     .append("' already initialized for the integer\n");
@@ -137,7 +135,7 @@ public class CloveVisitor extends CloveGrammarBaseVisitor {
             case "Str":
                 if (environment.get("Strings").containsKey(id)) {
                     System.out.println("Variable already declared");
-                    errors.append("ERROR: Variable '").append(id).append("' already declared for the string\n");
+                    errors.append("ERROR: String Variable '").append(id).append("' already declared for the string\n");
                     System.exit(0);
                 } else {
                     environment.get("Strings").put(id, null);
@@ -148,7 +146,7 @@ public class CloveVisitor extends CloveGrammarBaseVisitor {
 
                 if (environment.get("Integers").containsKey(id)) {
                     System.out.println("Variable already declared");
-                    errors.append("ERROR: Variable '").append(id).append("' already declared for the Integers\n");
+                    errors.append("ERROR: Int Variable '").append(id).append("' already declared for the Integers\n");
                     System.exit(0);
                 } else {
                     environment.get("Integers").put(id, null);
@@ -159,7 +157,7 @@ public class CloveVisitor extends CloveGrammarBaseVisitor {
 
                 if (environment.get("Booleans").containsKey(id)) {
                     System.out.println("Variable already declared");
-                    errors.append("ERROR: Variable '").append(id).append("' already declared for the Booleans\n");
+                    errors.append("ERROR: Boolean Variable '").append(id).append("' already declared for the Booleans\n");
                     System.exit(0);
                 } else {
                     environment.get("Integers").put(id, null);
@@ -190,7 +188,7 @@ public class CloveVisitor extends CloveGrammarBaseVisitor {
             }
         }
         if (!variableFound) {
-            errors.append("HERE ERROR: Variable '").append(ctx.ID(1).getText())
+            errors.append("ERROR: Int Variable '").append(ctx.ID(1).getText())
                     .append("' not found in the environment \n");
             System.out.println(errors);
             System.exit(0);
@@ -219,7 +217,7 @@ public class CloveVisitor extends CloveGrammarBaseVisitor {
             }
         }
         if (!variableFound) {
-            errors.append(" HERE 2 ERROR: Variable '").append(ctx.ID(1)).append("' not found in the environment \n");
+            errors.append(" ERROR: String Variable '").append(ctx.ID(1)).append("' not found in the environment \n");
             System.out.println(errors);
             System.exit(0);
         } else {
@@ -247,7 +245,7 @@ public class CloveVisitor extends CloveGrammarBaseVisitor {
             }
         }
         if (!variableFound) {
-            errors.append("HERE 3 ERROR: Variable '").append(ctx.ID(1)).append("' not found in the environment \n");
+            errors.append("ERROR: Boolean Variable '").append(ctx.ID(1)).append("' not found in the environment \n");
             System.out.println(errors);
             System.exit(0);
         } else {
