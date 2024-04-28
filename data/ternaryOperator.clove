@@ -1,0 +1,6 @@
+int a = 10;
+int b = 25;
+int result;
+result = (b>a) ? a : b;
+
+print(result);

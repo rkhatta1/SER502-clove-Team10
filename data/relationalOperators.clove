@@ -1,0 +1,27 @@
+int i;
+int a = 5;
+
+for i in range(1, 10) {
+    if (i <= 4) {
+        i++;
+        i = i * 2;
+        print(i);
+    } else {
+        if (a != 4){
+        print(i-a);
+        };
+    };
+};
+
+Str eol = "End of Loop";
+while (i>5) {
+i--;
+if (a == 4) {
+    print(i);
+} else {
+    print(eol);
+};
+};
+
+
+

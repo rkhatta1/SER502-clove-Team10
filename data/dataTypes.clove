@@ -1,0 +1,15 @@
+int a = 5;
+int b = 10;
+int c = 6;
+int d = 9;
+Str str1 = "Hello World!";
+bool test1 = true;
+bool test2 = true;
+
+if (test1 and test2) {
+    print(str1);
+    print(d+c*b/a-b);
+    print(d%c);
+} else {
+    print(d);
+};
