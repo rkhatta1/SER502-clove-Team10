@@ -1,0 +1,20 @@
+$If-Else condition
+int a = 2;
+int b = 4;
+int c = 6;
+int d = 8;
+int e = 10;
+int res;
+
+if(b==4 and (a+b)==6){
+	res = (a+b)-d/b+c*e; 
+};
+print(res);
+Str s1 = "hello";
+Str s2 = "world";
+if(res<=50)
+{
+        print(s1);
+}else{
+        print(s2);
+};
