@@ -1,28 +1,30 @@
 ﻿Members of Team #10:
 
-Up until Milestone 1:
+Contribution:
 
 1. Raajveer Khattar (rkhatta1):
 * Set up the GiHub repository.
 * Implemented the grammar for Ternary operator and the AND/OR/NOT boolean conditions.
+* Added evaluation for: program, statement, Integer Declaration Statement, String Declaration Statement, Boolean
+    Declaration Statement and initialization for all Data types.
+* Added test cases to test boolean operators, data types, for loop and relational operator.
 
 
 2. Jill Bharat Hansalia (jhansali):
 * Implemented the Grammar for Loops (While, For, ForEach).
+* Added evaluator for : Assignment Operator Statement, Increment Operation, Decrement Operation, Ternary Operation, Print
+    with identifier and print with expression, boolean not condition and boolean identifier operation.
+* Added test cases: while loop, if-else and program which includes all functionality.
 
 
 3. Akshata Vijay Kulkarni (akulka89):
-* Implemented the grammar for Declarative Statements for data types and the assignment operators, also the arithematic expressions.
+* Implemented the grammar for Declarative Statements for data types and the assignment operators, also the arithematic
+    expressions.
+* Added evaluator for : Boolean Condition, Visit Condition Connector, Not Id Boolean, Parentheses relational expression,
+    relational expression, Id Expression, Num Expression, Arithmetic Expression, Paratheses Expression
 
 
 4. Sahil Tarun Parwani (sparwan1):
 * Implemented the grammar for if-then-else, print function, whitespace handling and comments.
-
-
-
-
-For Milestone 2:
-
-
-* The team will collectively work on the runtime environment for the language and exporting an installable package for a package manager (ex. pip, npm).
-* We shall also create a presentation/video for the language and test all the features.
+* Added grammar for if then else condition , if statements, else Statements, while condition, ternary operator,
+    traditional for loop, for each loop and condition with parenthesis.
