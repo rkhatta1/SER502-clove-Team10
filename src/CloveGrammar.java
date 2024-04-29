@@ -11,7 +11,6 @@ public class CloveGrammar {
 
         String filePath = "./data/testProgram1.clove";
 
-        // The first command line argument should be the name of the Equilibrium source file to be executed
         if(args.length > 0) {
             filePath = "./data/" + args[0];
         }
@@ -33,7 +32,6 @@ public class CloveGrammar {
 
         try {
             PrintWriter writer = new PrintWriter("parseTree.pt", "UTF-8");
-//                writer.println(tree);
             writer.println(tree.toStringTree(parser));
             writer.close();
         } catch (Exception e) {

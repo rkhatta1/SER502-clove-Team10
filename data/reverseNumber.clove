@@ -1,0 +1,13 @@
+$ Program to reverse a number
+
+int n=1234;
+int reverse=0;
+int remainder;
+
+print(n);
+while (n > 0) {
+    remainder = n % 10;
+    reverse = reverse * 10 + remainder;
+    n = n / 10;
+};
+print(reverse);

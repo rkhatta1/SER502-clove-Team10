@@ -1,0 +1,13 @@
+int a = 5;
+int i = 0;
+Str eos = "End of Section";
+
+for i in range(1, 10) {
+	print(i+a);
+};
+
+print(eos);
+
+for (i=0; i<5; i++) {
+    print(a-i);
+};
