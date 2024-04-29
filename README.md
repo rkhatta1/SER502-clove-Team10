@@ -21,14 +21,42 @@ Java and Antlr are used to build the Clove language. Both need to be installed o
 
 ## Steps:
 
-NOTE: Since Clove is an interpreted language, once the grammar is finalized and the parse tree is built, there is no need to rebuild it. Clove source code files can be run with just one command line script. 
+NOTE: Since Clove is an interpreted language, once the grammar is finalized and the parse tree is built, there is no need to rebuild it. Clove source code files can be run with just one command line script.
 
-1. Download the source code with Zip file for Clove language.
-2. Unzip the file to the location of your choosing.
-3. Open the data directory and add the file (`fileName.clove`, for example) that you want to run.
-4. Open the command prompt in the src directory by navigating there.
-5. On windows run the command : `java -jar <downloaded antlr jar file path> -no-listener -visitor -o . CloveGrammar.g4`
-6. On Mac you can run the command : `antlr -visitor CloveGrammar.g4`
-7. You can see the lexer and parser file generated.
-8. Compile the Clove : `javac -cp "<downloaded antlr jar file path>" *.java`
-9. Execute the Clove evaluator : `java -cp ".;<downloaded antlr jar file path>" CloveGrammar`
+
+# Approach 1:
+1. Clone the repository on your local machine.
+2. On branch main, `cd` into the parent directory.
+3. There must be a `clove.jar` file in the parent directory. Open up terminal and run this command:
+
+  `java -jar clove.jar <file_name.clove>`
+
+  For example, if I were to execute the `ifElse.clove` file located in the `./data` directory, I would run:
+
+  `java -jar clove.jar ifElse.clove`
+
+4. The clove code shall be compiled and executed to show the results in the terminal.
+
+
+# Approach 2:
+1. Clone the repository on your local machine.
+2. Open the data directory and add the file (`fileName.clove`, for example) that you want to run.
+3. Open the command prompt in the src directory by navigating there.
+4. On windows run the command:
+
+   `java -jar <downloaded antlr jar file path> -no-listener -visitor -o . CloveGrammar.g4`
+
+5. On Mac you can run the command:
+
+   `antlr -visitor CloveGrammar.g4`
+
+6. You can see the lexer and parser files generated.
+
+
+7. Compile Clove:
+   
+   `javac -cp "<downloaded antlr jar file path>" *.java`
+
+9. Execute the Clove evaluator:
+
+    `java -cp ".;<downloaded antlr jar file path>" CloveGrammar`
