@@ -1,0 +1,122 @@
+int a = 1;
+int b = 15;
+int c = 6;
+int d = 9;
+int i = 0;
+int e = 10;
+int res;
+Str str1 = "Hello World!";
+bool test1 = true;
+bool test2 = true;
+Str eos = "End of Section";
+Str s1 = "hello";
+Str s2 = "world";
+
+$ Test for boolean operation
+if ((b > 5) and (a > 5)) {
+print(a+b);
+} else {
+print(b-a);
+};
+
+if ((b > 5) or (a > 5)) {
+print(a+b);
+} else {
+print(b-a);
+};
+
+if (not(a < 5)) {
+print(a+b);
+} else {
+print(b-a);
+};
+
+print(eos);
+
+$ test for boolean data type and checking operator precedence
+if (test1 and test2) {
+    print(str1);
+    print(d+c*b/a-b);
+    print(d%c);
+} else {
+    print(d);
+};
+
+print(eos);
+
+$ Test for for loop
+for i in range(1, 10) {
+	print(i+a);
+};
+print(eos);
+for (i=0; i<5; i++) {
+    print(a-i);
+};
+print(eos);
+
+$If-Else condition
+a = 2;
+b = 4;
+c = 6;
+d = 8;
+
+if(b==4 and (a+b)==6){
+	res = (a+b)-d/b+c*e;
+};
+print(res);
+if(res<=50)
+{
+        print(s1);
+}else{
+        print(s2);
+};
+
+print(eos);
+
+$ Test for relational operator
+a = 5;
+for i in range(1, 10) {
+    if (i <= 4) {
+        i++;
+        i = i * 2;
+        print(i);
+    } else {
+        if (a != 4){
+            print(i-a);
+        };
+    };
+};
+Str eol = "End of Loop";
+while (i>5) {
+    i--;
+    if (a == 4) {
+        print(i);
+    } else {
+        print(eol);
+    };
+};
+print(eos);
+
+
+$ Program to reverse a number
+
+int n=1234;
+int reverse=0;
+int remainder;
+print(n);
+while (n > 0) {
+    remainder = n % 10;
+    reverse = reverse * 10 + remainder;
+    n = n / 10;
+};
+print(reverse);
+
+print(eos);
+
+$ Test for ternary operation
+a = 10;
+b = 25;
+int result;
+result = (b>a) ? a : b;
+
+print(result);
